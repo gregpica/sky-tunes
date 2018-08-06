@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import storage from '../util/storage';
 import userClient from '../clients/user';
 import { JWT } from '../constants';
-import queryString from 'query-string'
 
 class Callback extends React.Component {
   constructor(props){
@@ -11,6 +10,7 @@ class Callback extends React.Component {
   }
 
   componentDidMount(){
+    const queryString = require('query-string')
     const code = queryString.parse(this.props.location.search).code
     userClient.post(code)
       .then(response => response.json())
