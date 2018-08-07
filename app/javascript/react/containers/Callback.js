@@ -16,23 +16,24 @@ class Callback extends React.Component {
   componentDidMount(){
     const queryString = require('query-string')
     const parsedQuerySearch = queryString.parse(this.props.location.search)
-    if(parsedQuerySearch.error) {
-      this.setState({ error: "You must connect to Spotify in order to user SkyTunes!" });
-    } else {
+    if(parsedQuerySearch.code) {
       userClient.post(parsedQuerySearch.code)
         .then(response => response.json())
         .then(body => storage.set(JWT, body))
         .then(() => this.props.history.push('/track-player'))
-        .catch(error => console.error(`Error in fetch: ${error.message}`));
+        .catch(error => console.error(`Error in fetch: ${error.message}`))
+    } else {
+      this.setState({ error: "You must connect to Spotify in order to user SkyTunes!" });
     }
   }
 
   render() {
     let callBackElement = <div></div>
     if (this.state.error) {
-      callBackElement = <Login
-                          error={this.state.error}
-                        />
+      callBackElement = <div>
+                          <p>{this.state.error}</p>
+                          <a href="/login"><button>OK</button></a>
+                        </div>
     }
 
     return(
