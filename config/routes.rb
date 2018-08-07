@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :login, only: [:index]
   resources :callback, only: [:index]
   resources :track_player,  :path => '/track-player', only: [:index]
+  resources :add_track, :path => '/add-track'
 
   namespace :api do
     namespace :v1 do
