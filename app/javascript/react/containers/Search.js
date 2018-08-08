@@ -15,10 +15,13 @@ class Search extends React.Component {
    super(props)
    this.state = {
      query: null,
-     tracks: []
+     tracks: [],
+     selectedTrack: null
     };
     this.debouncedSearchSpotify = debounce(this.searchSpotify, 300);
     this.handleChange = this.handleChange.bind(this);
+    this.onSelectTrack = this.onSelectTrack.bind(this);
+
  }
 
  handleChange({ target: { value } }) {
@@ -42,18 +45,38 @@ class Search extends React.Component {
      .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
 
+ onSelectTrack(id) {
+   this.setState({
+     selectedTrack: id
+   })
+ }
+
  render() {
-   const resultDiv = this.state.tracks.map(track => {
-      return <SearchResultTile
-                key={track.id}
-                id={track.id}
-                title={track.name}
-                artists={createArtistList(track.artists)}
-                album={track.album.name}
-                albumCover={track.album.images[1].url}
-                duration={convert.msToMinsAndSecs(track.duration_ms)}
-             />
-   });
+
+   let resultDiv;
+   if (!this.state.selectedTrack) {
+     resultDiv = this.state.tracks.map(track => {
+       return <SearchResultTile
+                 key={track.id}
+                 title={track.name}
+                 artists={createArtistList(track.artists)}
+                 album={track.album.name}
+                 albumCover={track.album.images[1].url}
+                 duration={convert.msToMinsAndSecs(track.duration_ms)}
+                 onClick={() => this.onSelectTrack(track.id)}
+              />
+    });
+  } else {
+    const selectedTrack = this.state.tracks.find(track => track.id === this.state.selectedTrack)
+    return <SearchResultTile
+      title={selectedTrack.name}
+      artists={createArtistList(selectedTrack.artists)}
+      album={selectedTrack.album.name}
+      albumCover={selectedTrack.album.images[1].url}
+      duration={convert.msToMinsAndSecs(selectedTrack.duration_ms)}
+    />
+  }
+
 
    return (
      <form>
