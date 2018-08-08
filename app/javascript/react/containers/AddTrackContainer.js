@@ -1,4 +1,5 @@
 import React from 'react';
+import Search from './Search';
 
 class AddTrackContainer extends React.Component {
   constructor(props){
@@ -11,7 +12,10 @@ class AddTrackContainer extends React.Component {
   render() {
 
     return(
-      <div> Welcome to the Add Track page </div>
+      <div>
+        <div> Welcome to the Add Track page </div>
+        <Search />
+      </div>
     )
   }
 }
