@@ -2,13 +2,8 @@ import React from 'react';
 import searchClient from '../clients/search';
 import SearchResultTile from '../components/SearchResultTile';
 import convert from '../util/convert';
+import createArtistList from '../util/createArtistList'
 import { debounce } from 'lodash';
-
-const createArtistList = (artists) => {
-  return artists.map(artistObject => {
-          return artistObject.name
-         }).join(', ')
-}
 
 class Search extends React.Component {
  constructor(props) {
@@ -20,8 +15,6 @@ class Search extends React.Component {
     };
     this.debouncedSearchSpotify = debounce(this.searchSpotify, 300);
     this.handleChange = this.handleChange.bind(this);
-    this.onSelectTrack = this.onSelectTrack.bind(this);
-
  }
 
  handleChange({ target: { value } }) {
@@ -45,38 +38,19 @@ class Search extends React.Component {
      .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
 
- onSelectTrack(id) {
-   this.setState({
-     selectedTrack: id
-   })
- }
-
  render() {
 
-   let resultDiv;
-   if (!this.state.selectedTrack) {
-     resultDiv = this.state.tracks.map(track => {
-       return <SearchResultTile
-                 key={track.id}
-                 title={track.name}
-                 artists={createArtistList(track.artists)}
-                 album={track.album.name}
-                 albumCover={track.album.images[1].url}
-                 duration={convert.msToMinsAndSecs(track.duration_ms)}
-                 onClick={() => this.onSelectTrack(track.id)}
-              />
+   const resultDiv = this.state.tracks.map(track => {
+     return <SearchResultTile
+               key={track.id}
+               title={track.name}
+               artists={createArtistList(track.artists)}
+               album={track.album.name}
+               albumCover={track.album.images[1].url}
+               duration={convert.msToMinsAndSecs(track.duration_ms)}
+               onClick={() => this.props.handleSelect(track)}
+            />
     });
-  } else {
-    const selectedTrack = this.state.tracks.find(track => track.id === this.state.selectedTrack)
-    return <SearchResultTile
-      title={selectedTrack.name}
-      artists={createArtistList(selectedTrack.artists)}
-      album={selectedTrack.album.name}
-      albumCover={selectedTrack.album.images[1].url}
-      duration={convert.msToMinsAndSecs(selectedTrack.duration_ms)}
-    />
-  }
-
 
    return (
      <form>
