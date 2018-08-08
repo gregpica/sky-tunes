@@ -1,10 +1,16 @@
-import React from 'react'
+import React from 'react';
 import searchClient from '../clients/search';
+import SearchResultTile from '../components/SearchResultTile';
+import convert from '../util/convert';
 import { debounce } from 'lodash';
 
+const createArtistList = (artists) => {
+  return artists.map(artistObject => {
+          return artistObject.name
+         }).join(', ')
+}
+
 class Search extends React.Component {
-
-
  constructor(props) {
    super(props)
    this.state = {
@@ -37,9 +43,18 @@ class Search extends React.Component {
  }
 
  render() {
-   const resultDiv = this.state.tracks.map((track, i) => {
-      return <p key={i}>{track.name}</p>
+   const resultDiv = this.state.tracks.map(track => {
+      return <SearchResultTile
+                key={track.id}
+                id={track.id}
+                title={track.name}
+                artists={createArtistList(track.artists)}
+                album={track.album.name}
+                albumCover={track.album.images[1].url}
+                duration={convert.msToMinsAndSecs(track.duration_ms)}
+             />
    });
+
    return (
      <form>
        <input

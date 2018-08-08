@@ -3,7 +3,7 @@ import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import Login from './Login';
 import Callback from './Callback';
 import TrackPlayer from './TrackPlayer';
-import NewTrackContainer from './AddTrackContainer';
+import NewTrackContainer from './NewTrackContainer';
 import ProtectedRoute from '../components/ProtectedRoute';
 
 export const App = (props) => {
