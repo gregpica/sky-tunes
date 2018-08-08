@@ -3,7 +3,7 @@ import { JWT } from '../constants'
 
 
 const SEARCH_PATH = 'https://api.spotify.com/v1/search';
-const accessToken = storage.get(JWT).access_token
+const accessToken = storage.get(JWT) ? storage.get(JWT).access_token : ""
 
 const defaultOptions = {
   headers: {
