@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from './Search';
 
-class AddTrackContainer extends React.Component {
+class NewTrackContainer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -20,4 +20,4 @@ class AddTrackContainer extends React.Component {
   }
 }
 
-export default AddTrackContainer
+export default NewTrackContainer
