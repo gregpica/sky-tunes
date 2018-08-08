@@ -7,7 +7,10 @@ class TrackPlayer extends React.Component {
 
   render() {
     return(
-      <div>Track Player Page</div>
+      <div>
+        <div>Track Player Page</div>
+        <a href="/tracks/new"><button>Add New Track</button></a>
+      </div>
     )
   }
 }
