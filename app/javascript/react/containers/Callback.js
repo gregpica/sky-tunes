@@ -2,7 +2,10 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import storage from '../util/storage';
 import userClient from '../clients/user';
+import meClient from '../clients/me';
 import { JWT } from '../constants';
+
+
 import Login from './Login'
 
 class Callback extends React.Component {
@@ -20,6 +23,10 @@ class Callback extends React.Component {
       userClient.post(parsedQuerySearch.code)
         .then(response => response.json())
         .then(body => storage.set(JWT, body))
+        .catch(error => console.error(`Error in fetch: ${error.message}`))
+      meClient.get()
+        .then(response => response.json())
+        .then(body => storage.set('user', body))
         .then(() => this.props.history.push('/track-player'))
         .catch(error => console.error(`Error in fetch: ${error.message}`))
     } else {
