@@ -11,6 +11,7 @@ class NewTrackContainer extends React.Component {
       selectedTrack: null
     }
     this.onSelectTrack = this.onSelectTrack.bind(this);
+    this.renderSearchResultsOrForm = this.renderSearchResultsOrForm.bind(this);
 
   }
 
@@ -20,27 +21,28 @@ class NewTrackContainer extends React.Component {
     })
   }
 
-  render() {
-    const { selectedTrack } = this.state
-
-    let renderDiv;
+  renderSearchResultsOrForm() {
+    const { selectedTrack } = this.state;
     if (!selectedTrack) {
-      renderDiv = <Search
+      return <Search
                     handleSelect={(track) => this.onSelectTrack(track)}
-                  />
+             />
     } else {
-      renderDiv = <TrackForm
+      return <TrackForm
                     title={selectedTrack.name}
                     artists={createArtistList(selectedTrack.artists)}
                     album={selectedTrack.album.name}
                     albumCover={selectedTrack.album.images[1].url}
                     duration={convert.msToMinsAndSecs(selectedTrack.duration_ms)}
-                  />
+             />
     }
+  }
+
+  render() {
 
     return(
       <div>
-        {renderDiv}
+        {this.renderSearchResultsOrForm()}
       </div>
     )
   }

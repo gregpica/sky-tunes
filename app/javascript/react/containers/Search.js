@@ -10,9 +10,8 @@ class Search extends React.Component {
    super(props)
    this.state = {
      query: null,
-     tracks: [],
-     selectedTrack: null
-    };
+     tracks: []
+   };
     this.debouncedSearchSpotify = debounce(this.searchSpotify, 300);
     this.handleChange = this.handleChange.bind(this);
  }
