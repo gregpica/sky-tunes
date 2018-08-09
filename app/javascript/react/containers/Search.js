@@ -40,6 +40,7 @@ class Search extends React.Component {
  render() {
 
    const resultDiv = this.state.tracks.map(track => {
+     debugger;
      return <SearchResultTile
                key={track.id}
                title={track.name}

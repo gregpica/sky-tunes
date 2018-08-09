@@ -25,15 +25,16 @@ class NewTrackContainer extends React.Component {
     const { selectedTrack } = this.state;
     if (!selectedTrack) {
       return <Search
-                    handleSelect={(track) => this.onSelectTrack(track)}
+               handleSelect={(track) => this.onSelectTrack(track)}
              />
     } else {
       return <TrackForm
-                    title={selectedTrack.name}
-                    artists={createArtistList(selectedTrack.artists)}
-                    album={selectedTrack.album.name}
-                    albumCover={selectedTrack.album.images[1].url}
-                    duration={convert.msToMinsAndSecs(selectedTrack.duration_ms)}
+               id={selectedTrack.id}
+               title={selectedTrack.name}
+               artists={createArtistList(selectedTrack.artists)}
+               album={selectedTrack.album.name}
+               albumCover={selectedTrack.album.images[1].url}
+               duration={convert.msToMinsAndSecs(selectedTrack.duration_ms)}
              />
     }
   }
