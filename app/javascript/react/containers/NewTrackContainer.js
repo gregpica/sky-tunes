@@ -5,6 +5,7 @@ import convert from '../util/convert';
 import createArtistList from '../util/createArtistList';
 import storage from '../util/storage';
 import { JWT } from '../constants';
+import trackClient from '../clients/track';
 
 class NewTrackContainer extends React.Component {
   constructor(props){
@@ -25,13 +26,7 @@ class NewTrackContainer extends React.Component {
   }
 
   addTrack(payload){
-    fetch('/api/v1/user_track_category.json', {
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json',
-      'X-Requested-With': 'XHMLttpRequest' },
-      method: 'POST',
-      body: JSON.stringify(payload)
-    })
+    trackClient.post(payload)
       .then(response => response.json())
       .then(body => {
         this.setState({
