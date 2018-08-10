@@ -1,11 +1,23 @@
 import React from 'react';
+import categoryClient from '../clients/category';
 
 class TrackForm extends React.Component {
  constructor(props) {
    super(props)
    this.state = {
+     categories: []
+   };
+ }
 
-    };
+ componentDidMount() {
+   categoryClient.get()
+     .then(response => response.json())
+     .then(body =>
+       this.setState({
+         categories: body
+       })
+     )
+     .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
 
  render() {
@@ -25,7 +37,6 @@ class TrackForm extends React.Component {
    )
 
  }
-
 }
 
 export default TrackForm
