@@ -5,11 +5,8 @@ class TrackForm extends React.Component {
  constructor(props) {
    super(props)
    this.state = {
-     categories: [],
-     selectedCategories: []
+     categories: []
    };
-
-   this.handleInputChange = this.handleInputChange.bind(this);
  }
 
  componentDidMount() {
@@ -23,29 +20,13 @@ class TrackForm extends React.Component {
      .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
 
- handleInputChange({ target: { id } }) {
-   const { selectedCategories } = this.state;
-
-   if(selectedCategories.includes(id)) {
-     this.setState({
-       selectedCategories: selectedCategories.filter(categoryId => categoryId !== id)
-     })
-   } else {
-     selectedCategories.push(id)
-     this.setState({
-       selectedCategories: selectedCategories
-     })
-   }
- }
-
  render() {
    const categoryCheckBoxes = this.state.categories.map(category => {
                                  return  <label key={category.id}>
                                            {category.name}
                                            <input
-                                             id={category.id}
                                              type="checkbox"
-                                             onChange={this.handleInputChange}
+                                             onChange={() => this.props.handleInputChange(category.id)}
                                            />
                                           </label>
                                })

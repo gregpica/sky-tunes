@@ -12,9 +12,11 @@ class NewTrackContainer extends React.Component {
     super(props);
     this.state = {
       selectedTrack: null,
-      saveMessage: null
+      saveMessage: null,
+      selectedCategories: []
     }
     this.onSelectTrack = this.onSelectTrack.bind(this);
+    this.onSelectCategory = this.onSelectCategory.bind(this);
     this.renderSearchResultsOrForm = this.renderSearchResultsOrForm.bind(this);
     this.addTrack = this.addTrack.bind(this);
 
@@ -24,6 +26,21 @@ class NewTrackContainer extends React.Component {
     this.setState({
       selectedTrack: track
     })
+  }
+
+  onSelectCategory(id) {
+    const { selectedCategories } = this.state;
+
+    if(selectedCategories.includes(id)) {
+      this.setState({
+        selectedCategories: selectedCategories.filter(categoryId => categoryId !== id)
+      })
+    } else {
+      selectedCategories.push(id)
+      this.setState({
+        selectedCategories: selectedCategories
+      })
+    }
   }
 
   addTrack(payload){
@@ -64,6 +81,7 @@ class NewTrackContainer extends React.Component {
                albumCover={selectedTrack.album.images[1].url}
                duration={convert.msToMinsAndSecs(selectedTrack.duration_ms)}
                handleSubmit={() => this.addTrack(payload)}
+               handleInputChange={(id) => this.onSelectCategory(id)}
              />
     }
   }
