@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :login, only: [:index]
       resources :user, only: [:create]
+      resources :user_track_category, only: [:create]
     end
   end
 
