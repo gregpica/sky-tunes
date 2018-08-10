@@ -11,7 +11,8 @@ class NewTrackContainer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      selectedTrack: null
+      selectedTrack: null,
+      saveMessage: null
     }
     this.onSelectTrack = this.onSelectTrack.bind(this);
     this.renderSearchResultsOrForm = this.renderSearchResultsOrForm.bind(this);
@@ -29,9 +30,16 @@ class NewTrackContainer extends React.Component {
     trackClient.post(payload)
       .then(response => response.json())
       .then(body => {
-        this.setState({
-          selectedTrack: null
-        })
+        if(body.success) {
+          this.setState({
+            selectedTrack: null,
+            saveMessage: body.success
+          })
+        } else {
+          this.setState({
+            saveMessage: body.error
+          })
+        }
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -46,7 +54,7 @@ class NewTrackContainer extends React.Component {
       const payload = {
                         track_id: selectedTrack.id,
                         user_id: storage.get('user').id,
-                        category_id: 1
+                        category_id: 2
                       }
       return <TrackForm
                id={selectedTrack.id}
@@ -61,9 +69,9 @@ class NewTrackContainer extends React.Component {
   }
 
   render() {
-
     return(
       <div>
+        {this.state.saveMessage}
         {this.renderSearchResultsOrForm()}
       </div>
     )
