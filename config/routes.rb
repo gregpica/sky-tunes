@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :login, only: [:index]
       resources :user, only: [:create]
       resources :user_track_category, only: [:create]
+      resources :categories, only: [:index]
     end
   end
 

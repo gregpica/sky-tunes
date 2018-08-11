@@ -1,14 +1,35 @@
 import React from 'react';
+import categoryClient from '../clients/category';
 
 class TrackForm extends React.Component {
  constructor(props) {
    super(props)
    this.state = {
+     categories: []
+   };
+ }
 
-    };
+ componentDidMount() {
+   categoryClient.get()
+     .then(response => response.json())
+     .then(body =>
+       this.setState({
+         categories: body
+       })
+     )
+     .catch(error => console.error(`Error in fetch: ${error.message}`));
  }
 
  render() {
+   const categoryCheckBoxes = this.state.categories.map(category => {
+                                 return  <label key={category.id}>
+                                           {category.name}
+                                           <input
+                                             type="checkbox"
+                                             onChange={() => this.props.handleInputChange(category.id)}
+                                           />
+                                          </label>
+                               })
 
    return (
      <form onSubmit={this.props.handleSubmit}>
@@ -20,12 +41,12 @@ class TrackForm extends React.Component {
          <p>Duration: {this.props.duration}</p>
          <img src={this.props.albumCover} alt="album cover"/>
        </div>
+       {categoryCheckBoxes}
        <button type="submit" value="Submit">Save</button>
      </form>
    )
 
  }
-
 }
 
 export default TrackForm
