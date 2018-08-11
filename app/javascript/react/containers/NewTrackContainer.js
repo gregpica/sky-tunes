@@ -47,7 +47,7 @@ class NewTrackContainer extends React.Component {
     trackClient.post(payload)
       .then(response => response.json())
       .then(body => {
-        if(body.success) {
+         if(body.success) {
           this.setState({
             selectedTrack: null,
             saveMessage: body.success
@@ -71,7 +71,7 @@ class NewTrackContainer extends React.Component {
       const payload = {
                         track_id: selectedTrack.id,
                         user_id: storage.get('user').id,
-                        category_id: 2
+                        categories: this.state.selectedCategories
                       }
       return <TrackForm
                id={selectedTrack.id}
