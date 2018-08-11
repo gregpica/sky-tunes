@@ -43,22 +43,31 @@ class NewTrackContainer extends React.Component {
     }
   }
 
-  addTrack(payload){
-    trackClient.post(payload)
-      .then(response => response.json())
-      .then(body => {
-         if(body.success) {
-          this.setState({
-            selectedTrack: null,
-            saveMessage: body.success
-          })
-        } else {
-          this.setState({
-            saveMessage: body.error
-          })
-        }
+  addTrack(event, payload){
+    event.preventDefault();
+
+    if(this.state.selectedCategories.length) {
+      trackClient.post(payload)
+        .then(response => response.json())
+        .then(body => {
+           if(body.success) {
+            this.setState({
+              selectedTrack: null,
+              saveMessage: body.success
+            })
+          } else {
+            this.setState({
+              saveMessage: body.error
+            })
+          }
+        })
+        .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
+    else {
+      this.setState({
+        saveMessage: "You must select one or more categories!"
       })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
   }
 
   renderSearchResultsOrForm() {
@@ -80,7 +89,7 @@ class NewTrackContainer extends React.Component {
                album={selectedTrack.album.name}
                albumCover={selectedTrack.album.images[1].url}
                duration={convert.msToMinsAndSecs(selectedTrack.duration_ms)}
-               handleSubmit={() => this.addTrack(payload)}
+               handleSubmit={(event) => this.addTrack(event, payload)}
                handleInputChange={(id) => this.onSelectCategory(id)}
              />
     }
