@@ -1,5 +1,9 @@
 class Api::V1::UserTrackCategoryController < ApiController
 
+  def index
+    render json: UserTrackCategory.where({user_id: params[:user_id]})
+  end
+
   def create
     errors = false
     categories = params[:categories]
@@ -19,5 +23,5 @@ class Api::V1::UserTrackCategoryController < ApiController
       render json: {error: "Error: Your track failed to save to one or more categories!"}
     end
   end
-  
+
 end

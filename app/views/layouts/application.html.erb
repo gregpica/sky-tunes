@@ -10,7 +10,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
   <nav class="top-bar">
     <ul class="title-area">
       <li class="name">
@@ -25,6 +24,14 @@
       <%= value %>
     </div>
   <%- end -%>
+
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
+
+  <script>
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      // You can now initialize Spotify.Player and use the SDK
+    };
+  </script>
 
   <%= yield %>
 
