@@ -1,6 +1,8 @@
 import storage from '../util/storage';
+import { USER } from '../constants';
 
-const USER_TRACK_CATEGORY_PATH = `/api/v1/user/${storage.get('user').id}/user_track_category.json`;
+const userId = storage.get(USER) ? storage.get(USER).id : ""
+const USER_TRACK_CATEGORY_PATH = `/api/v1/user/${userId}/user_track_category.json`;
 
 const defaultOptions = {
   credentials: 'same-origin',
