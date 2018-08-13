@@ -11,12 +11,38 @@ const defaultOptions = {
   }
 };
 
-const put = (trackUris) => fetch(PLAYER_PATH, {
+const put = (trackUris, deviceId) => fetch(`${PLAYER_PATH}?device_id=${deviceId}`, {
   ...defaultOptions,
   body: JSON.stringify({ uris: trackUris }),
   method: 'PUT'
 });
 
+//
+// const get = () => fetch(PLAYBACK_INFO_PATH, {
+//   defaultOptions
+// });
+
+// export default {
+//   put: put,
+//   get: get
+// };
+
+const playerReady = () => new Promise(resolve => {
+  if (window.Spotify) {
+    resolve(window.Spotify);
+  } else {
+    window.onSpotifyWebPlaybackSDKReady = () => resolve(window.Spotify);
+  }
+});
+
+const get = () => playerReady()
+  .then(({ Player }) => new Player({
+    name: "SkyTunes SDK",
+    volume: 1.0,
+    getOAuthToken: callback => callback(accessToken)
+  }));
+
 export default {
+  get: get,
   put: put
-};
+}
