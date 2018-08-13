@@ -97,7 +97,7 @@ class NewTrackContainer extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className="text-center">
         {this.state.saveMessage}
         {this.renderSearchResultsOrForm()}
       </div>

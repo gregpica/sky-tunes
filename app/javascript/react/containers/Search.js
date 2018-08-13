@@ -1,7 +1,6 @@
 import React from 'react';
 import searchClient from '../clients/search';
 import SearchResultTile from '../components/SearchResultTile';
-import convert from '../util/convert';
 import createArtistList from '../util/createArtistList'
 import { debounce } from 'lodash';
 
@@ -46,20 +45,25 @@ class Search extends React.Component {
                artists={createArtistList(track.artists)}
                album={track.album.name}
                albumCover={track.album.images[1].url}
-               duration={convert.msToMinsAndSecs(track.duration_ms)}
                onClick={() => this.props.handleSelect(track)}
             />
     });
 
    return (
-     <form>
-       <input
-         placeholder="Search for..."
-         ref={input => this.search = input}
-         onChange={this.handleChange}
-       />
-       {resultDiv}
-     </form>
+     <div className="small-6 small-centered columns">
+      <div className="row wrapper">
+         <form>
+          <div className="search-bar">
+             <input
+               placeholder="Search for..."
+               ref={input => this.search = input}
+               onChange={this.handleChange}
+             />
+          </div>
+           {resultDiv}
+         </form>
+       </div>
+     </div>
    )
  }
 }

@@ -35,13 +35,12 @@ class TrackForm extends React.Component {
 
    return (
      <form onSubmit={this.props.handleSubmit}>
-       <h1>Add new Track</h1>
        <div>
-         <p>Title: {this.props.title}</p>
-         <p>Artist: {this.props.artists}</p>
+         <img src={this.props.albumCover} alt="album cover"/>
+         <h3>{this.props.title}</h3>
+         <p>{this.props.artists}</p>
          <p>Album: {this.props.album}</p>
          <p>Duration: {this.props.duration}</p>
-         <img src={this.props.albumCover} alt="album cover"/>
        </div>
        {categoryCheckBoxes}
        <button type="submit" value="Submit">Save</button>
