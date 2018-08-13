@@ -27,7 +27,7 @@ class Callback extends React.Component {
       meClient.get()
         .then(response => response.json())
         .then(body => storage.set('user', body))
-        .then(() => this.props.history.push('/tracks'))
+        .then(() => this.props.history.push('/track-player'))
         .catch(error => console.error(`Error in fetch: ${error.message}`))
     } else {
       this.setState({ error: "You must connect to Spotify in order to user SkyTunes!" });

@@ -17,16 +17,6 @@ const put = (trackUris, deviceId) => fetch(`${PLAYER_PATH}?device_id=${deviceId}
   method: 'PUT'
 });
 
-//
-// const get = () => fetch(PLAYBACK_INFO_PATH, {
-//   defaultOptions
-// });
-
-// export default {
-//   put: put,
-//   get: get
-// };
-
 const playerReady = () => new Promise(resolve => {
   if (window.Spotify) {
     resolve(window.Spotify);

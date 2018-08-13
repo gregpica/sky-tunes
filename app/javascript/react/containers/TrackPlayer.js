@@ -1,6 +1,8 @@
 import React from 'react';
 import trackClient from '../clients/track';
 import playerClient from '../clients/player';
+import { Link } from 'react-router-dom';
+
 
 class TrackPlayer extends React.Component {
   constructor(props){
@@ -46,7 +48,7 @@ class TrackPlayer extends React.Component {
       <div>
         <div>Track Player Page</div>
         <div>Currently Playing: {currentTrack && currentTrack.name}</div>
-        { this.props.children }
+        <Link to="/tracks/new"><button>Add New Track</button></Link>
       </div>
     )
   }
