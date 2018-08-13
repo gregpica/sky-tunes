@@ -3,6 +3,8 @@
 <head>
   <title>SkyTunes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
   <%= stylesheet_link_tag 'application', media: 'all' %>
 
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -10,7 +12,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
   <nav class="top-bar">
     <ul class="title-area">
       <li class="name">
@@ -25,6 +26,15 @@
       <%= value %>
     </div>
   <%- end -%>
+
+  <script src="https://sdk.scdn.co/spotify-player.js"></script>
+
+  <script>
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      console.log("The Web Playback SDK is ready. We have access to Spotify.Player");
+      console.log(window.Spotify.Player);
+    };
+  </script>
 
   <%= yield %>
 

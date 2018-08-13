@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :login, only: [:index]
-      resources :user, only: [:create]
-      resources :user_track_category, only: [:create]
+      resources :user, only: [:create] do
+        resources :user_track_category, only: [:create, :index]
+      end
       resources :categories, only: [:index]
     end
   end

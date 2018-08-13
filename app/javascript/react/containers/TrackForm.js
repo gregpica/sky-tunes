@@ -22,14 +22,16 @@ class TrackForm extends React.Component {
 
  render() {
    const categoryCheckBoxes = this.state.categories.map(category => {
-                                 return  <label key={category.id}>
-                                           {category.name}
-                                           <input
-                                             type="checkbox"
-                                             onChange={() => this.props.handleInputChange(category.id)}
-                                           />
-                                          </label>
-                               })
+     return (
+       <label key={category.id}>
+         {category.name}
+         <input
+           type="checkbox"
+           onChange={() => this.props.handleInputChange(category.id)}
+         />
+       </label>
+      );
+   })
 
    return (
      <form onSubmit={this.props.handleSubmit}>

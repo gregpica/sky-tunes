@@ -7,6 +7,7 @@ class Api::V1::LoginController < ApiController
       client_id: ENV['CLIENT_ID'],
       response_type: "code",
       redirect_uri: ENV['REDIRECT_URI'],
+      scope: "user-modify-playback-state user-read-playback-state user-read-currently-playing streaming app-remote-control user-read-birthdate user-read-email user-read-private",
       show_dialog: true
     }
 

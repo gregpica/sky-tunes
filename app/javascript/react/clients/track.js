@@ -1,4 +1,8 @@
-const USER_TRACK_CATEGORY_PATH = '/api/v1/user_track_category.json';
+import storage from '../util/storage';
+import { USER } from '../constants';
+
+const userId = storage.get(USER) ? storage.get(USER).id : ""
+const USER_TRACK_CATEGORY_PATH = `/api/v1/user/${userId}/user_track_category.json`;
 
 const defaultOptions = {
   credentials: 'same-origin',
@@ -14,6 +18,11 @@ const post = (payload) => fetch(USER_TRACK_CATEGORY_PATH, {
   method: 'POST'
 });
 
+const get = () => fetch(USER_TRACK_CATEGORY_PATH, {
+  ...defaultOptions
+});
+
 export default {
-  post: post
+  post: post,
+  get: get
 };

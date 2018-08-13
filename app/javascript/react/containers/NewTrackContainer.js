@@ -53,6 +53,7 @@ class NewTrackContainer extends React.Component {
            if(body.success) {
             this.setState({
               selectedTrack: null,
+              selectedCategories: [],
               saveMessage: body.success
             })
           } else {
@@ -79,7 +80,6 @@ class NewTrackContainer extends React.Component {
     } else {
       const payload = {
                         track_id: selectedTrack.id,
-                        user_id: storage.get('user').id,
                         categories: this.state.selectedCategories
                       }
       return <TrackForm
