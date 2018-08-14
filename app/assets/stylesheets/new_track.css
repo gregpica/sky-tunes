@@ -1,0 +1,45 @@
+.row .row{
+  margin-top: 1em;
+}
+
+.search-result {
+  /* border-style: solid;
+  border-color: #444444;
+  border-width: .1em; */
+  padding: 1em;
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 2px 3px rgba(72, 72, 72, 0.15);
+}
+
+.search-result:hover {
+    cursor: pointer;
+    box-shadow: 1px 3px 4px rgba(72, 72, 72, 0.88);
+}
+
+.new-track-container {
+  background-color: white;
+}
+
+.search-form{
+  width: 50%
+}
+
+.search-bar {
+  margin-top: 2em;
+}
+
+.form-album-cover {
+  margin-top: 2em;
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+.form-save {
+  opacity: .8;
+  background-color: #333333;
+  margin-top: 1em;
+}
+
+.form-save:hover {
+  background-color: #2C6A77;
+}

@@ -24,7 +24,8 @@ class NewTrackContainer extends React.Component {
 
   onSelectTrack(track) {
     this.setState({
-      selectedTrack: track
+      selectedTrack: track,
+      saveMessage: null
     })
   }
 
@@ -97,7 +98,7 @@ class NewTrackContainer extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className="text-center">
         {this.state.saveMessage}
         {this.renderSearchResultsOrForm()}
       </div>

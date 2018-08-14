@@ -3,8 +3,8 @@ import React from 'react'
 const CurrentTrackPlaying = props => {
   return (
     <div>
-      <img src={props.albumCover} alt="album cover"/>
-      <h3>{props.title}</h3>
+      <img className="playing-album-cover" src={props.albumCover} alt="album cover"/>
+      <h3 className="playing-title">{props.title}</h3>
       <p>{props.artists}</p>
       <div className="small-3 small-centered columns">
         <div className="row wrapper">

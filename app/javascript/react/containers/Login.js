@@ -4,7 +4,11 @@ const Login = props => {
 
   return (
     <div>
-      <a href="/api/v1/login"><button>Log in</button></a>
+      <div className="text-center login">
+          <a href="/api/v1/login">
+            <button className="login-button">Log in</button>
+          </a>
+      </div>
     </div>
   )
 }

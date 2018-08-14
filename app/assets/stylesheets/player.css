@@ -1,0 +1,41 @@
+.next-prev-icon {
+  font-size: 32px;
+  padding-top: 9px;
+  color: #333333;
+  opacity: .9;
+}
+
+.play-icon {
+  font-size: 50px;
+  color: #333333;
+  opacity: .9;
+}
+
+.next-prev-icon:hover {
+  cursor: pointer;
+  color: #347B89;
+}
+
+.play-icon:hover {
+  cursor: pointer;
+  color: #347B89;
+}
+
+
+.playing-album-cover {
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+.playing-title {
+  padding-top: 20px;
+}
+
+.add-new-track {
+  opacity: .8;
+  background-color: #333333;
+}
+
+.add-new-track:hover {
+  background-color: #2C6A77;
+}
