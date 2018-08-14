@@ -11,6 +11,17 @@
   opacity: .9;
 }
 
+.next-prev-icon:hover {
+  cursor: pointer;
+  color: #347B89;
+}
+
+.play-icon:hover {
+  cursor: pointer;
+  color: #347B89;
+}
+
+
 .playing-album-cover {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
@@ -23,4 +34,8 @@
 .add-new-track {
   opacity: .8;
   background-color: #333333;
+}
+
+.add-new-track:hover {
+  background-color: #2C6A77;
 }

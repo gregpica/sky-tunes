@@ -13,11 +13,7 @@
 
 .search-result:hover {
     cursor: pointer;
-    box-shadow: 1px 3px 4px rgba(72, 72, 72, 0.68);
-}
-
-.search-cover {
-  text-align: left
+    box-shadow: 1px 3px 4px rgba(72, 72, 72, 0.88);
 }
 
 .new-track-container {
@@ -28,10 +24,22 @@
   width: 50%
 }
 
-.input {
-  margin: 1em;
-}
-
 .search-bar {
   margin-top: 2em;
+}
+
+.form-album-cover {
+  margin-top: 2em;
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+.form-save {
+  opacity: .8;
+  background-color: #333333;
+  margin-top: 1em;
+}
+
+.form-save:hover {
+  background-color: #2C6A77;
 }

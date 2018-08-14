@@ -23,27 +23,37 @@ class TrackForm extends React.Component {
  render() {
    const categoryCheckBoxes = this.state.categories.map(category => {
      return (
-       <label key={category.id}>
-         {category.name}
-         <input
-           type="checkbox"
-           onChange={() => this.props.handleInputChange(category.id)}
-         />
-       </label>
+       <div className="columns small-3">
+         <label key={category.id}>
+           {category.name}
+           <input
+             type="checkbox"
+             onChange={() => this.props.handleInputChange(category.id)}
+           />
+         </label>
+       </div>
       );
    })
 
    return (
      <form onSubmit={this.props.handleSubmit}>
-       <div>
-         <img src={this.props.albumCover} alt="album cover"/>
+       <div className="track-from">
+         <img className="form-album-cover" src={this.props.albumCover} alt="album cover"/>
          <h3>{this.props.title}</h3>
-         <p>{this.props.artists}</p>
-         <p>Album: {this.props.album}</p>
-         <p>Duration: {this.props.duration}</p>
+         <p>{this.props.artists} - {this.props.album}</p>
+         <p>
+            <i className="far fa-clock"></i>
+            {`  ${this.props.duration}`}
+         </p>
        </div>
-       {categoryCheckBoxes}
-       <button type="submit" value="Submit">Save</button>
+       <div className="row">
+       <div className="columns small-8 small-centered">
+        <div className="row">
+          {categoryCheckBoxes}
+        </div>
+       </div>
+       </div>
+       <button type="submit" value="Submit" className="form-save">Save</button>
      </form>
    )
 
