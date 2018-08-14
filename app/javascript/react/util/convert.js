@@ -4,6 +4,9 @@ const msToMinsAndSecs = ms => {
   return mins + ":" + (secs < 10 ? '0' : '') + secs;
 }
 
+const toUpperUnderscore = str => str.toUpperCase().replace(/-/g,'_')
+
 export default {
-  msToMinsAndSecs: msToMinsAndSecs
+  msToMinsAndSecs: msToMinsAndSecs,
+  toUpperUnderscore: toUpperUnderscore
 }

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         resources :user_track_category, only: [:create, :index]
       end
       resources :categories, only: [:index]
+      resources :weather, only: [:index]
     end
   end
 
