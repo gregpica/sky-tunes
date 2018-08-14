@@ -24,7 +24,8 @@ class NewTrackContainer extends React.Component {
 
   onSelectTrack(track) {
     this.setState({
-      selectedTrack: track
+      selectedTrack: track,
+      saveMessage: null
     })
   }
 

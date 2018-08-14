@@ -55,7 +55,7 @@ class Search extends React.Component {
          <form>
           <div className="search-bar">
              <input
-               placeholder="Search for..."
+               placeholder="Search for tracks..."
                ref={input => this.search = input}
                onChange={this.handleChange}
              />
