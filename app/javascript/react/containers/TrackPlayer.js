@@ -1,7 +1,9 @@
 import React from 'react';
 import trackClient from '../clients/track';
 import playerClient from '../clients/player';
+import weatherClient from '../clients/weather';
 import CurrentTrackPlaying from '../components/CurrentTrackPlaying';
+import CurrentWeather from '../components/CurrentWeather';
 import { Link } from 'react-router-dom';
 import createArtistList from '../util/createArtistList';
 import convert from '../util/convert';
@@ -11,10 +13,12 @@ class TrackPlayer extends React.Component {
     super(props)
     this.state = {
       playerState: null,
-      player: null
+      player: null,
+      currentWeather: null
     };
     this.setupPlayer = this.setupPlayer.bind(this);
     this.getUserTracksAndStartPlayback = this.getUserTracksAndStartPlayback.bind(this);
+    this.getWeatherData = this.getWeatherData.bind(this);
   }
 
   setupPlayer() {
@@ -42,8 +46,20 @@ class TrackPlayer extends React.Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  getWeatherData() {
+    weatherClient.get()
+      .then(response => response.json())
+      .then(body => {
+        this.setState({
+          currentWeather: body.currently
+        })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   componentDidMount() {
     this.setupPlayer();
+    this.getWeatherData();
   }
 
   render() {
@@ -66,9 +82,21 @@ class TrackPlayer extends React.Component {
       />
     }
 
+    let currentWeatherDiv;
+    const {currentWeather} = this.state;
+
+    if (currentWeather) {
+      currentWeatherDiv= <CurrentWeather
+        temperature={Math.round(currentWeather.temperature)}
+        summary={currentWeather.summary}
+        icon={convert.toUpperUnderscore(currentWeather.icon)}
+      />
+    }
+
     return(
       <div className="text-center">
         <br></br>
+        {currentWeatherDiv}
         {currentTrackDiv}
         <br></br>
         <Link to="/tracks/new"><button className="add-new-track">Add New Track</button></Link>
