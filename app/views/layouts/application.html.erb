@@ -12,14 +12,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="app-background">
-  <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">SkyTunes</a></h1>
-      </li>
-    </ul>
-
-  </nav>
 
   <%- flash.each do |key, value| -%>
     <div class="flash flash-<%= key %>">

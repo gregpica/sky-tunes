@@ -99,7 +99,7 @@ class TrackPlayer extends React.Component {
         {currentWeatherDiv}
         {currentTrackDiv}
         <br></br>
-        <Link to="/tracks/new"><button className="add-new-track">Add New Track</button></Link>
+        <Link to="/tracks/new"><button className="add-new-track">Add New Tracks</button></Link>
       </div>
     )
   }
