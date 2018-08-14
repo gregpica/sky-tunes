@@ -1,0 +1,23 @@
+.navbar {
+  opacity: .8;
+  background-color: #333333;
+  height: 3em;
+  color: #FFFFFF;
+  font-size: 1em;
+  position: relative;
+}
+
+.nav-link {
+  color: white;
+  display: inline-block;
+  padding: 1%;
+}
+
+.nav-link:hover {
+  color: #F8D6D2;
+}
+
+.nav-new-track.nav-link {
+  position: absolute;
+  right: 1%;
+}
