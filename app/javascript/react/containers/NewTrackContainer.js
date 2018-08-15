@@ -4,7 +4,7 @@ import TrackForm from './TrackForm';
 import convert from '../util/convert';
 import createArtistList from '../util/createArtistList';
 import storage from '../util/storage';
-import { JWT } from '../constants';
+import { JWT, USER } from '../constants';
 import trackClient from '../clients/track';
 
 class NewTrackContainer extends React.Component {
@@ -46,9 +46,9 @@ class NewTrackContainer extends React.Component {
 
   addTrack(event, payload){
     event.preventDefault();
-
+    const userId = storage.get(USER).id;
     if(this.state.selectedCategories.length) {
-      trackClient.post(payload)
+      trackClient.post(userId, payload)
         .then(response => response.json())
         .then(body => {
            if(body.success) {

@@ -3,3 +3,12 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#app {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* *:not([class*="fa-"]) {
+  font-family: 'Roboto', sans-serif !important;
+} */

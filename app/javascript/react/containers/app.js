@@ -3,6 +3,7 @@ import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import Login from './Login';
 import Callback from './Callback';
 import TrackPlayer from './TrackPlayer';
+import TracksIndexContainer from './TracksIndexContainer';
 import NewTrackContainer from './NewTrackContainer';
 import ProtectedRoute from '../components/ProtectedRoute';
 import NavBar from '../components/NavBar';
@@ -17,7 +18,8 @@ export const App = (props) => {
             <Route path='/callback' component={Callback} />
             <ProtectedRoute path='/track-player' component={TrackPlayer} />
             <ProtectedRoute path='/tracks/new' component={NewTrackContainer} />
-            <Redirect to='/login' />
+            <ProtectedRoute path='/tracks' component={TracksIndexContainer} />
+            <Redirect to='/track-player' />
           </Switch>
         </NavBar>
       </Switch>
