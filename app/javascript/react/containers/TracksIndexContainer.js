@@ -1,5 +1,7 @@
 import React from 'react';
 import trackClient from '../clients/track';
+import storage from '../util/storage';
+import { USER } from '../constants';
 
 
 class TracksIndexContainer extends React.Component {
@@ -11,7 +13,8 @@ class TracksIndexContainer extends React.Component {
   }
 
   componentDidMount() {
-    trackClient.get()
+    const userId = storage.get(USER).id;
+    trackClient.get(userId)
       .then(response => response.json())
       .then(body => {
         this.setState({
