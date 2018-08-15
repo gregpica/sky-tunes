@@ -7,11 +7,14 @@ import CurrentWeather from '../components/CurrentWeather';
 import { Link } from 'react-router-dom';
 import createArtistList from '../util/createArtistList';
 import convert from '../util/convert';
+import storage from '../util/storage';
+import { USER } from '../constants';
 
 class TrackPlayer extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      isPlayerLoading: false,
       playerState: null,
       player: null,
       currentWeather: null
@@ -22,6 +25,7 @@ class TrackPlayer extends React.Component {
   }
 
   setupPlayer() {
+    this.setState({ isPlayerLoading: true });
     playerClient.get()
       .then(player => {
         player.addListener("player_state_changed", state => {
@@ -30,15 +34,17 @@ class TrackPlayer extends React.Component {
         player.addListener('ready', ({ device_id }) => {
           this.getUserTracksAndStartPlayback(device_id)
         });
-        player.connect();
         this.setState({player: player})
+        return player.connect();
       })
+      .finally(() => this.setState({ isPlayerLoading: false }))
   }
 
   getUserTracksAndStartPlayback(deviceId) {
-    trackClient.get()
+    const userId = storage.get(USER).id;
+    trackClient.get(userId)
       .then(response => response.json())
-      .then(tracks => tracks.map(track => track.track_id))
+      .then(body => body.user_track_categories.map(track => track.track_id))
       .then(trackIds => {
         const trackUris = trackIds.map(trackId => `spotify:track:${trackId}`);
         return playerClient.put(trackUris, deviceId);
@@ -97,7 +103,7 @@ class TrackPlayer extends React.Component {
       <div className="text-center">
         <br></br>
         {currentWeatherDiv}
-        {currentTrackDiv}
+        {this.state.isPlayerLoading ? <p> Loading... </p> : currentTrackDiv }
         <br></br>
         <Link to="/tracks/new"><button className="add-new-track">Add New Tracks</button></Link>
       </div>

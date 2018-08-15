@@ -21,3 +21,8 @@
   position: absolute;
   right: 1%;
 }
+
+.nav-tracks.nav-link {
+  position: absolute;
+  right: 13%;
+}

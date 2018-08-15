@@ -1,4 +1,4 @@
-class Api::V1::UserTrackCategoryController < ApiController
+class Api::V1::UserTrackCategoriesController < ApiController
 
   def index
     render json: UserTrackCategory.where({user_id: params[:user_id]})

@@ -1,18 +1,10 @@
-import storage from '../util/storage';
-import { JWT } from '../constants'
+import getDefaultOptions from '../util/getDefaultOptions';
+import getToken from '../util/getToken';
 
 const PLAYER_PATH = 'https://api.spotify.com/v1/me/player/play';
-const accessToken = storage.get(JWT) ? storage.get(JWT).access_token : ""
-
-const defaultOptions = {
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${accessToken}`
-  }
-};
 
 const put = (trackUris, deviceId) => fetch(`${PLAYER_PATH}?device_id=${deviceId}`, {
-  ...defaultOptions,
+  ...getDefaultOptions(),
   body: JSON.stringify({ uris: trackUris }),
   method: 'PUT'
 });
@@ -29,7 +21,7 @@ const get = () => playerReady()
   .then(({ Player }) => new Player({
     name: "SkyTunes SDK",
     volume: 1.0,
-    getOAuthToken: callback => callback(accessToken)
+    getOAuthToken: callback => callback(getToken())
   }));
 
 export default {

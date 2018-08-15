@@ -14,7 +14,7 @@ class TrackForm extends React.Component {
      .then(response => response.json())
      .then(body =>
        this.setState({
-         categories: body
+         categories: body.categories
        })
      )
      .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -23,8 +23,8 @@ class TrackForm extends React.Component {
  render() {
    const categoryCheckBoxes = this.state.categories.map(category => {
      return (
-       <div className="columns small-3">
-         <label key={category.id}>
+       <div key={category.id} className="columns small-3">
+         <label>
            {category.name}
            <input
              type="checkbox"
