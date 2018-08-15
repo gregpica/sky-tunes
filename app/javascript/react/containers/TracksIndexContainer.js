@@ -14,7 +14,7 @@ class TracksIndexContainer extends React.Component {
 
   componentDidMount() {
     const userId = storage.get(USER).id;
-    trackClient.get()
+    trackClient.get(userId)
       .then(response => response.json())
       .then(body => {
         this.setState({
