@@ -7,7 +7,6 @@ const NavBar = props => {
       <div className="navbar">
         <Link to='/track-player' className="nav-link">SkyTunes</Link>
         <Link to='/tracks' className="nav-link nav-tracks">My Tracks</Link>
-        <Link to='/tracks/new' className="nav-link nav-new-track">Add New Tracks</Link>
       </div>
       <div>
         {props.children}
