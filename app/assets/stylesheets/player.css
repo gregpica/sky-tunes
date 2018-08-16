@@ -17,14 +17,14 @@
 
 .next-prev-icon:hover {
   cursor: pointer;
-  color: #347B89;
-  text-shadow: 2px 2px 6px #245A6B;
+  color: #49adc1;
+  text-shadow: 2px 2px 6px #1a3f47;
 }
 
 .play-icon:hover {
   cursor: pointer;
-  color: #347B89;
-  text-shadow: 2px 2px 6px #245A6B;
+  color: #49adc1;
+  text-shadow: 2px 2px 6px #1a3f47;
 }
 
 
@@ -44,7 +44,7 @@
 }
 
 .add-new-track:hover {
-  background-color: #2C6A77;
+  background-color: #49adc1;
 }
 
 .sky-con {

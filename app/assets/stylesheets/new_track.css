@@ -29,7 +29,8 @@
 }
 
 .form-album-cover {
-  margin-top: 2em;
+  margin-top: 3em;
+  padding-bottom: 1.5em;
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
 }
@@ -37,9 +38,15 @@
 .form-save {
   opacity: .8;
   background-color: #333333;
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 
 .form-save:hover {
-  background-color: #2C6A77;
+  background-color: #49adc1;
+}
+
+.save-message {
+  background-color: #ffe496;
+  color: #333333;
+  opacity: .8;
 }

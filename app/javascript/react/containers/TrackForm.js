@@ -24,12 +24,13 @@ class TrackForm extends React.Component {
    const categoryCheckBoxes = this.state.categories.map(category => {
      return (
        <div key={category.id} className="columns small-3">
-         <label>
+         <label className="container">
            {category.name}
            <input
              type="checkbox"
              onChange={() => this.props.handleInputChange(category.id)}
            />
+           <div className="checkmark"></div>
          </label>
        </div>
       );

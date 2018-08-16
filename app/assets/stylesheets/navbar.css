@@ -8,13 +8,20 @@
 }
 
 .nav-link {
-  color: white;
+  color: #FFFFFF;
   display: inline-block;
   padding: 1%;
 }
 
 .nav-link:hover {
   color: #F8D6D2;
+  text-shadow: 2px 1px 1px #a3a3a3;
+
+}
+
+.nav-link:visited {
+  color: #FFFFFF;
+
 }
 
 .nav-tracks.nav-link {
