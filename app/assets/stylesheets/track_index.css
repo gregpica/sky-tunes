@@ -1,0 +1,28 @@
+.index-tile {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+}
+
+.index-tile .wrapper {
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 1px 2px 3px rgba(72, 72, 72, 0.15);
+  margin-bottom: .75em;
+  padding-left: 0em;
+
+}
+
+.index-tile .wrapper:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 1px rgba(72, 72, 72, 0.88);
+}
+
+.index-tile .wrapper img{
+  width: 4em;
+  height: auto;
+  padding-left: 0em;
+}
+
+.index-tile .wrapper span{
+  padding-top: 0.8rem;
+}

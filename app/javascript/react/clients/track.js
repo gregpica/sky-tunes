@@ -1,4 +1,7 @@
+import getDefaultOptions from '../util/getDefaultOptions';
+
 const USER_TRACK_CATEGORY_PATH = '/api/v1/user';
+const SPOTIFY_TRACKS_PATH = 'https://api.spotify.com/v1/tracks';
 
 const defaultOptions = {
   credentials: 'same-origin',
@@ -22,7 +25,12 @@ const get = userId => fetch(
   defaultOptions
 );
 
+const getInfo = trackIds => fetch(`${SPOTIFY_TRACKS_PATH}/?ids=${trackIds}`,
+  getDefaultOptions()
+)
+
 export default {
   post: post,
-  get: get
+  get: get,
+  getInfo: getInfo
 };

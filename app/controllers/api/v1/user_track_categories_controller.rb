@@ -1,7 +1,7 @@
 class Api::V1::UserTrackCategoriesController < ApiController
 
   def index
-    render json: UserTrackCategory.where({user_id: params[:user_id]})
+    render json: UserTrackCategory.where({user_id: params[:user_id]}).pluck(:track_id).uniq
   end
 
   def create
