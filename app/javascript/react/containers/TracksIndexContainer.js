@@ -49,7 +49,12 @@ class TracksIndexContainer extends React.Component {
 
     return(
       <div>
-        <br></br>
+        <div className="index-labels">
+          <span className="title">TITLE</span>
+          <span className="title">ARTIST</span>
+          <span className="title">ALBUM</span>
+          <span className="title"><i className="far fa-clock"></i></span>
+        </div>
         {this.getTrackIndexTiles()}
       </div>
     )
