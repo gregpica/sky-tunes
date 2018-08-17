@@ -11,10 +11,12 @@ class TracksIndexContainer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      tracks: []
+      tracks: [],
+      droppedDownTracks: []
     }
 
     this.getTrackIndexTiles = this.getTrackIndexTiles.bind(this);
+    this.dropDownTrack = this.dropDownTrack.bind(this);
   }
 
   componentDidMount() {
@@ -31,9 +33,32 @@ class TracksIndexContainer extends React.Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  dropDownTrack(id) {
+     const { droppedDownTracks } = this.state
+
+     if(droppedDownTracks.includes(id)) {
+       this.setState({
+         droppedDownTracks: droppedDownTracks.filter(trackId => trackId !== id)
+       })
+     } else {
+       droppedDownTracks.push(id)
+       this.setState({
+         droppedDownTracks: droppedDownTracks
+       })
+     }
+  }
+
   getTrackIndexTiles() {
-    return this.state.tracks.map(track =>
-      <TrackIndexTile
+    return this.state.tracks.map(track => {
+      let hidden, dropDownIcon;
+      if (this.state.droppedDownTracks.includes(track.id)) {
+        hidden = "";
+        dropDownIcon = "fas fa-minus"
+      } else {
+        hidden = "hidden";
+        dropDownIcon = "fas fa-plus"
+      }
+      return <TrackIndexTile
          key={track.id}
          id={track.id}
          title={track.name}
@@ -41,8 +66,11 @@ class TracksIndexContainer extends React.Component {
          album={track.album.name}
          albumCover={track.album.images[1].url}
          duration={convert.msToMinsAndSecs(track.duration_ms)}
-      />
-    )
+         dropDownIcon={dropDownIcon}
+         hidden={hidden}
+         dropDownTrack={(id) => this.dropDownTrack(id)}
+       />
+    })
   }
 
   render() {
