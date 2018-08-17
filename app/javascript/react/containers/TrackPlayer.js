@@ -44,6 +44,7 @@ class TrackPlayer extends React.Component {
     const userId = storage.get(USER).id;
     trackClient.get(userId)
       .then(response => response.json())
+      .then(body => body.user_track_categories.map(track => track.track_id))
       .then(trackIds => {
         const trackUris = trackIds.map(trackId => `spotify:track:${trackId}`);
         return playerClient.put(trackUris, deviceId);

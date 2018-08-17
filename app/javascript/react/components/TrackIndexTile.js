@@ -13,7 +13,10 @@ const TrackIndexTile = props => {
       </span>
       <div className={props.hidden}>
         <span className="small-12 columns wrapper">
-          "hey"
+          <div className="row text-center hey">
+            <button className="small-2 columns edit-delete">Edit</button>
+            <button className="small-2 columns edit-delete" onClick={() => props.handleDelete(props.id)}>Delete</button>
+          </div>
         </span>
       </div>
 

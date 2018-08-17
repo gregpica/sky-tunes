@@ -12,17 +12,20 @@ class TracksIndexContainer extends React.Component {
     super(props);
     this.state = {
       tracks: [],
-      droppedDownTracks: []
+      droppedDownTracks: [],
+      changeMessage: null
     }
 
     this.getTrackIndexTiles = this.getTrackIndexTiles.bind(this);
     this.dropDownTrack = this.dropDownTrack.bind(this);
+    this.deleteTrack = this.deleteTrack.bind(this);
   }
 
   componentDidMount() {
     const userId = storage.get(USER).id;
     trackClient.get(userId)
       .then(response => response.json())
+      .then(body => body.user_track_categories.map(track => track.track_id))
       .then(trackIds => trackClient.getInfo(trackIds))
       .then(response => response.json())
       .then(body => {
@@ -48,6 +51,27 @@ class TracksIndexContainer extends React.Component {
      }
   }
 
+  deleteTrack(id) {
+    if (window.confirm('Are you sure you want to delete this track?')) {
+      const userId = storage.get(USER).id;
+      trackClient.deleteTrack(userId, id)
+        .then(response  => response.json())
+        .then(body => {
+          if(body.success) {
+           this.setState({
+             changeMessage: body.success,
+             tracks: this.state.tracks.filter(track => track.id !== id)
+           })
+         } else {
+           this.setState({
+             changeMessage: body.error
+           })
+         }
+        })
+        .catch(error => console.error(`Error in fetch: ${error.message}`))
+    }
+  }
+
   getTrackIndexTiles() {
     return this.state.tracks.map(track => {
       let hidden, dropDownIcon;
@@ -69,6 +93,7 @@ class TracksIndexContainer extends React.Component {
          dropDownIcon={dropDownIcon}
          hidden={hidden}
          dropDownTrack={(id) => this.dropDownTrack(id)}
+         handleDelete={(id) => this.deleteTrack(id)}
        />
     })
   }
@@ -77,6 +102,9 @@ class TracksIndexContainer extends React.Component {
 
     return(
       <div>
+        <div className="save-message">
+          {this.state.changeMessage}
+        </div>
         <div className="index-labels">
           <span className="title">TITLE</span>
           <span className="title">ARTIST</span>
