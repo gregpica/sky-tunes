@@ -3,6 +3,7 @@ import TrackIndexTile from '../components/TrackIndexTile';
 import convert from '../util/convert';
 import createArtistList from '../util/createArtistList';
 import trackClient from '../clients/track';
+import categoryClient from '../clients/category';
 import storage from '../util/storage';
 import { USER } from '../constants';
 
@@ -12,7 +13,8 @@ class TracksIndexContainer extends React.Component {
     this.state = {
       tracks: [],
       droppedDownTracks: [],
-      changeMessage: null
+      changeMessage: null,
+      allCategories: []
     }
 
     this.getTrackIndexTiles = this.getTrackIndexTiles.bind(this);
@@ -30,6 +32,14 @@ class TracksIndexContainer extends React.Component {
           tracks: tracks
         })
       })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    categoryClient.get()
+      .then(response => response.json())
+      .then(body =>
+        this.setState({
+          allCategories: body.categories
+        })
+      )
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
@@ -90,6 +100,8 @@ class TracksIndexContainer extends React.Component {
          dropDownIcon={dropDownIcon}
          dropDownTrack={() => this.dropDownTrack(track.id)}
          handleDelete={() => this.deleteTrack(track.id)}
+         allCategories={this.state.allCategories}
+         trackCategories={track.categories.map(category => category.id)}
       />
     })
   }

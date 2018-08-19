@@ -1,6 +1,22 @@
 import React from 'react'
 
 const TrackIndexTile = props => {
+
+  const categoryCheckBoxes = props.allCategories.map(category => {
+    return (
+      <div key={category.id} className="columns small-3">
+        <label className="container">
+          {category.name}
+          <input
+            type="checkbox"
+            checked={props.trackCategories.includes(category.id)}
+          />
+          <div className="checkmark"></div>
+        </label>
+      </div>
+     );
+  })
+
   return (
     <div className="index-tile">
       <span className="small-12 columns wrapper">
@@ -13,6 +29,7 @@ const TrackIndexTile = props => {
       </span>
       <div className={props.hidden}>
         <span className="small-12 columns wrapper">
+          {categoryCheckBoxes}
           <div className="row text-center hey">
             <button className="small-2 columns edit-delete">Edit</button>
             <button className="small-2 columns edit-delete" onClick={props.handleDelete}>Delete</button>
