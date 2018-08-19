@@ -28,6 +28,10 @@
   padding-top: 0.8rem;
 }
 
+.index-tile .wrapper i{
+  padding-top: 1.1rem;
+}
+
 .index-labels {
   margin: 1% 2%;
   color: #c2c3c5;
@@ -51,11 +55,24 @@
 
 .index-labels .title:nth-child(3){
   padding-left: 12px;
-  width:24%;
+  width:13%;
 }
 
 .index-labels .title:last-child{
-  width: 8%;
-  text-align: right;
-  padding-right: 16px;
+  width: 144px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.edit-delete {
+  margin-top: 1em;
+  width: 20%;
+}
+
+.hey {
+  padding-right: 20em;
+  padding-left: 20em;
 }

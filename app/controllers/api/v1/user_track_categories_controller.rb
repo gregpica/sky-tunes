@@ -1,7 +1,16 @@
 class Api::V1::UserTrackCategoriesController < ApiController
 
   def index
-    render json: UserTrackCategory.where({user_id: params[:user_id]}).select('distinct on (user_track_categories.track_id) user_track_categories.*')
+    render json: UserTrackCategory.where({user_id: params[:user_id]}).select('distinct on (user_track_categories.track_id) user_track_categories.*');
+  end
+
+  def destroy
+    user_track_categories_to_destroy = UserTrackCategory.where({user_id: params[:user_id], track_id: params[:id]})
+    if user_track_categories_to_destroy.destroy_all
+      render json: {success: "Track deleted successfully!"}
+    else
+      render json: {error: "Error: Failed to delete track!"}
+    end
   end
 
   def create
