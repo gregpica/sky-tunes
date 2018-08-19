@@ -6,7 +6,6 @@ import trackClient from '../clients/track';
 import storage from '../util/storage';
 import { USER } from '../constants';
 
-
 class TracksIndexContainer extends React.Component {
   constructor(props){
     super(props);
@@ -75,21 +74,24 @@ class TracksIndexContainer extends React.Component {
       let hidden, dropDownIcon;
       if (this.state.droppedDownTracks.includes(track.id)) {
         hidden = "";
-        dropDownIcon = "fas fa-minus"
+        dropDownIcon = "fas fa-minus";
       } else {
         hidden = "hidden";
-        dropDownIcon = "fas fa-plus"
+        dropDownIcon = "fas fa-plus";
       }
       return <TrackIndexTile
          key={track.id}
-         id={track.id}
          title={track.title}
          artists={track.artist}
          album={track.album}
          albumCover={track.album_cover}
          duration={track.duration}
+         hidden={hidden}
+         dropDownIcon={dropDownIcon}
+         dropDownTrack={() => this.dropDownTrack(track.id)}
+         handleDelete={() => this.deleteTrack(track.id)}
       />
-    )
+    })
   }
 
   render() {
