@@ -80,7 +80,12 @@ class NewTrackContainer extends React.Component {
              />
     } else {
       const payload = {
-                        track_id: selectedTrack.id,
+                        spotify_track_id: selectedTrack.id,
+                        title: selectedTrack.name,
+                        artist: createArtistList(selectedTrack.artists),
+                        album: selectedTrack.album.name,
+                        album_cover: selectedTrack.album.images[1].url,
+                        duration: convert.msToMinsAndSecs(selectedTrack.duration_ms),
                         categories: this.state.selectedCategories
                       }
       return <TrackForm

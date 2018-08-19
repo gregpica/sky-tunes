@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_170601) do
+ActiveRecord::Schema.define(version: 2018_08_19_173300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,13 +22,26 @@ ActiveRecord::Schema.define(version: 2018_08_09_170601) do
     t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
+  create_table "tracks", id: false, force: :cascade do |t|
+    t.string "spotify_track_id", null: false
+    t.string "title", null: false
+    t.string "artist", null: false
+    t.string "album", null: false
+    t.string "album_cover", null: false
+    t.string "duration", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spotify_track_id"], name: "index_tracks_on_spotify_track_id", unique: true
+  end
+
   create_table "user_track_categories", force: :cascade do |t|
     t.string "user_id", null: false
-    t.string "track_id", null: false
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "track_id", null: false
     t.index ["category_id"], name: "index_user_track_categories_on_category_id"
+    t.index ["track_id"], name: "index_user_track_categories_on_track_id"
   end
 
 end
