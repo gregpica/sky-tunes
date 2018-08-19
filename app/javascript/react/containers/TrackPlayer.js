@@ -44,9 +44,8 @@ class TrackPlayer extends React.Component {
     const userId = storage.get(USER).id;
     trackClient.get(userId)
       .then(response => response.json())
-      .then(body => body.user_track_categories.map(track => track.track_id))
-      .then(trackIds => {
-        const trackUris = trackIds.map(trackId => `spotify:track:${trackId}`);
+      .then(body => {
+        const trackUris = body.user_track_categories.map(utc => `spotify:track:${utc.track.id}`);
         return playerClient.put(trackUris, deviceId);
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));

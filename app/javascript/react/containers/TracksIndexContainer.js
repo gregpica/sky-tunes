@@ -25,12 +25,10 @@ class TracksIndexContainer extends React.Component {
     const userId = storage.get(USER).id;
     trackClient.get(userId)
       .then(response => response.json())
-      .then(body => body.user_track_categories.map(track => track.track_id))
-      .then(trackIds => trackClient.getInfo(trackIds))
-      .then(response => response.json())
       .then(body => {
+        const tracks = body.user_track_categories.map(utc => utc.track);
         this.setState({
-          tracks: body.tracks
+          tracks: tracks
         })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -85,17 +83,13 @@ class TracksIndexContainer extends React.Component {
       return <TrackIndexTile
          key={track.id}
          id={track.id}
-         title={track.name}
-         artists={createArtistList(track.artists)}
-         album={track.album.name}
-         albumCover={track.album.images[1].url}
-         duration={convert.msToMinsAndSecs(track.duration_ms)}
-         dropDownIcon={dropDownIcon}
-         hidden={hidden}
-         dropDownTrack={(id) => this.dropDownTrack(id)}
-         handleDelete={(id) => this.deleteTrack(id)}
-       />
-    })
+         title={track.title}
+         artists={track.artist}
+         album={track.album}
+         albumCover={track.album_cover}
+         duration={track.duration}
+      />
+    )
   }
 
   render() {
