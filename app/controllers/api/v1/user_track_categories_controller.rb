@@ -13,6 +13,36 @@ class Api::V1::UserTrackCategoriesController < ApiController
     end
   end
 
+  def edit; end
+
+  def update
+    errors = false
+    user_track_params = {user_id: params[:user_id], track_id: params[:id]}
+    previous_categories = UserTrackCategory.where(user_track_params).pluck(:category_id)
+    selected_categories = params[:categories]
+    previous_categories.each do |category_id|
+      if !selected_categories.include?(category_id)
+        user_track_category_to_destroy = UserTrackCategory.where({user_id: params[:user_id], track_id: params[:id], category_id: category_id}).first
+        user_track_category_to_destroy.destroy
+      end
+    end
+    selected_categories.each do |category_id|
+      if !previous_categories.include?(category_id)
+        new_user_track_category = UserTrackCategory.new({user_id: params[:user_id], track_id: params[:id], category_id: category_id})
+        if !new_user_track_category.save
+          errors = true
+        end
+      end
+    end
+
+    if !errors
+      render json: {success: "Track edited successfully!"}
+    else
+      render json: {error: "Error: Something went wrong while editing your track!"}
+    end
+
+  end
+
   def create
     errors = false
     categories = params[:categories]
