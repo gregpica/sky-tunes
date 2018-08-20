@@ -67,6 +67,10 @@ class TrackPlayer extends React.Component {
     this.getWeatherData();
   }
 
+  componentWillUnmount() {
+    this.state.player.disconnect();
+  }
+
   render() {
     const currentTrack = this.state.playerState && this.state.playerState.track_window.current_track;
 
