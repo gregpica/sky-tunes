@@ -1,7 +1,8 @@
 import React from 'react'
 
 const TrackIndexTile = props => {
-  let editDiv;
+
+  let editDiv
   let hideForEdit = "";
 
   if (props.editMode) {
@@ -23,8 +24,8 @@ const TrackIndexTile = props => {
          );
       })
 
-    editDiv = <form onSubmit={props.handleSubmit}>
-      <br></br>
+    editDiv = <form className="edit-form" onSubmit={props.handleSubmit}>
+      <i className="fas fa-times edit-x" onClick={props.cancelEdit}></i>
       <div className="row">
         <div className="columns small-8 small-centered">
            <div className="row">
@@ -38,6 +39,7 @@ const TrackIndexTile = props => {
     </form>
 
   } else {
+
     const checkBoxDiv = props.allCategories.map(category => {
         return (
           <div key={category.id} className="columns small-3">
@@ -53,6 +55,7 @@ const TrackIndexTile = props => {
           </div>
          );
       })
+
     editDiv = <div className="row">
       <div className="columns small-8 small-centered">
          <div className="row">

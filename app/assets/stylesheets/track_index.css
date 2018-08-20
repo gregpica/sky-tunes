@@ -82,3 +82,12 @@
   padding-right: 20em;
   padding-left: 20em;
 }
+
+.edit-form {
+  padding-top: 1em;
+}
+
+.edit-x {
+  padding-left: 2em;
+  font-size: 22px;
+}

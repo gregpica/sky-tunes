@@ -4,7 +4,7 @@ import TrackForm from './TrackForm';
 import convert from '../util/convert';
 import createArtistList from '../util/createArtistList';
 import storage from '../util/storage';
-import { JWT, USER } from '../constants';
+import { JWT, USER, NO_CATEGORY_MESSAGE } from '../constants';
 import trackClient from '../clients/track';
 
 class NewTrackContainer extends React.Component {
@@ -67,7 +67,7 @@ class NewTrackContainer extends React.Component {
     }
     else {
       this.setState({
-        saveMessage: "You must select one or more categories!"
+        saveMessage: NO_CATEGORY_MESSAGE
       })
     }
   }
