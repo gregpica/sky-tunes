@@ -26,6 +26,15 @@ const deleteTrack = (userId, trackId) => fetch(
   }
 );
 
+const editTrack = (userId, trackId, payload) => fetch(
+  `${USER_TRACK_CATEGORY_PATH}/${userId}/user_track_categories/${trackId}.json`,
+  {
+    ...defaultOptions,
+    body: JSON.stringify(payload),
+    method: 'PATCH'
+  }
+);
+
 const get = userId => fetch(
   `${USER_TRACK_CATEGORY_PATH}/${userId}/user_track_categories.json`,
   defaultOptions
@@ -34,5 +43,6 @@ const get = userId => fetch(
 export default {
   post: post,
   deleteTrack: deleteTrack,
+  editTrack: editTrack,
   get: get
 };

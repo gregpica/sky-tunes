@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :login, only: [:index]
       resources :user, only: [:create] do
-        resources :user_track_categories, only: [:create, :index, :destroy]
+        resources :user_track_categories, only: [:create, :index, :destroy, :update]
       end
       resources :categories, only: [:index]
       resources :weather, only: [:index]

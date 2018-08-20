@@ -3,8 +3,9 @@ import TrackIndexTile from '../components/TrackIndexTile';
 import convert from '../util/convert';
 import createArtistList from '../util/createArtistList';
 import trackClient from '../clients/track';
+import categoryClient from '../clients/category';
 import storage from '../util/storage';
-import { USER } from '../constants';
+import { USER, CANCEL_EDIT_MESSAGE, DELETE_MESSAGE, NO_CATEGORY_MESSAGE } from '../constants';
 
 class TracksIndexContainer extends React.Component {
   constructor(props){
@@ -12,12 +13,22 @@ class TracksIndexContainer extends React.Component {
     this.state = {
       tracks: [],
       droppedDownTracks: [],
-      changeMessage: null
+      changeMessage: null,
+      allCategories: [],
+      editMode: [],
+      selectedCategories: {},
+      edited: []
     }
 
     this.getTrackIndexTiles = this.getTrackIndexTiles.bind(this);
     this.dropDownTrack = this.dropDownTrack.bind(this);
     this.deleteTrack = this.deleteTrack.bind(this);
+    this.editTrack = this.editTrack.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
+    this.onSelectCategory = this.onSelectCategory.bind(this);
+    this.getStoredCategories = this.getStoredCategories.bind(this);
+    this.getSelectedCategories = this.getSelectedCategories.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +39,14 @@ class TracksIndexContainer extends React.Component {
         const tracks = body.user_track_categories.map(utc => utc.track);
         this.setState({
           tracks: tracks
+        })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    categoryClient.get()
+      .then(response => response.json())
+      .then(body => {
+        this.setState({
+          allCategories: body.categories
         })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -49,7 +68,7 @@ class TracksIndexContainer extends React.Component {
   }
 
   deleteTrack(id) {
-    if (window.confirm('Are you sure you want to delete this track?')) {
+    if (window.confirm(DELETE_MESSAGE)) {
       const userId = storage.get(USER).id;
       trackClient.deleteTrack(userId, id)
         .then(response  => response.json())
@@ -66,6 +85,86 @@ class TracksIndexContainer extends React.Component {
          }
         })
         .catch(error => console.error(`Error in fetch: ${error.message}`))
+    }
+  }
+
+  editTrack(event, trackId, categoryIds) {
+    event.preventDefault();
+    if(categoryIds.length) {
+      const userId = storage.get(USER).id;
+      const payload = {
+        categories: categoryIds
+      }
+      trackClient.editTrack(userId, trackId, payload)
+        .then(response  => response.json())
+        .then(body => {
+          if(body.success) {
+           this.state.edited.push(trackId)
+           this.setState({
+             changeMessage: body.success,
+             droppedDownTracks: this.state.droppedDownTracks.filter(id => id !== trackId),
+             edited: this.state.edited,
+             editMode: this.state.editMode.filter(id => id !== trackId)
+           })
+         } else {
+           this.setState({
+             changeMessage: body.error
+           })
+         }
+        })
+        .catch(error => console.error(`Error in fetch: ${error.message}`))
+    } else {
+      this.setState({
+        changeMessage: NO_CATEGORY_MESSAGE
+      })
+    }
+  }
+
+  getStoredCategories(id) {
+    const track = this.state.tracks.find(track => track.id === id)
+    return track.categories.map(category => category.id)
+  }
+
+  handleEditClick(id) {
+    this.state.editMode.push(id)
+    let obj = this.state.selectedCategories
+    obj[id] = this.getStoredCategories(id)
+    this.setState({
+      editMode: this.state.editMode,
+      selectedCategories: obj
+    })
+  }
+
+  cancelEdit(trackId) {
+    if (window.confirm(CANCEL_EDIT_MESSAGE)) {
+      this.setState({
+        editMode: this.state.editMode.filter(id => id !== trackId)
+      })
+    }
+  }
+
+  getSelectedCategories(id) {
+    if (!this.state.editMode.includes(id) && !this.state.edited.includes(id)) {
+      return this.getStoredCategories(id)
+    } else {
+      return this.state.selectedCategories[id]
+    }
+  }
+
+  onSelectCategory(trackId, categoryId) {
+    const { selectedCategories } = this.state;
+
+    if(selectedCategories[trackId].includes(categoryId)) {
+      const updatedCategories = selectedCategories[trackId].filter(id => id !== categoryId)
+      selectedCategories[trackId] = updatedCategories
+      this.setState({
+        selectedCategories: selectedCategories
+      })
+    } else {
+      selectedCategories[trackId].push(categoryId)
+      this.setState({
+        selectedCategories: selectedCategories
+      })
     }
   }
 
@@ -90,6 +189,13 @@ class TracksIndexContainer extends React.Component {
          dropDownIcon={dropDownIcon}
          dropDownTrack={() => this.dropDownTrack(track.id)}
          handleDelete={() => this.deleteTrack(track.id)}
+         handleEditClick={() => this.handleEditClick(track.id)}
+         editMode={this.state.editMode.includes(track.id)}
+         allCategories={this.state.allCategories}
+         trackCategories={this.getSelectedCategories(track.id)}
+         handleInputChange={(categoryId) => this.onSelectCategory(track.id, categoryId)}
+         handleSubmit={(event) => this.editTrack(event, track.id, this.state.selectedCategories[track.id])}
+         cancelEdit={() => this.cancelEdit(track.id)}
       />
     })
   }
@@ -98,8 +204,10 @@ class TracksIndexContainer extends React.Component {
 
     return(
       <div>
-        <div className="save-message">
-          {this.state.changeMessage}
+        <div className="text-center">
+          <div className="save-message">
+            {this.state.changeMessage}
+          </div>
         </div>
         <div className="index-labels">
           <span className="title">TITLE</span>

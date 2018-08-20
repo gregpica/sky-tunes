@@ -13,9 +13,9 @@
 }
 
 .index-tile .wrapper:hover {
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.25);
-    box-shadow: 1px 1px 1px rgba(72, 72, 72, 0.88);
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 1px 1px rgba(72, 72, 72, 0.88);
 }
 
 .index-tile .wrapper img{
@@ -70,9 +70,24 @@
 .edit-delete {
   margin-top: 1em;
   width: 20%;
+  background-color: #333333;
+  opacity: .8;
 }
 
-.hey {
+.edit-delete:hover {
+  background-color: #49adc1;
+}
+
+.edit-delete-wrapper {
   padding-right: 20em;
   padding-left: 20em;
+}
+
+.edit-form {
+  padding-top: 1em;
+}
+
+.edit-x {
+  padding-left: 2em;
+  font-size: 22px;
 }
