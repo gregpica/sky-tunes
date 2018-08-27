@@ -1,7 +1,12 @@
 class Api::V1::UserTrackCategoriesController < ApiController
 
   def index
-    render json: UserTrackCategory.where({user_id: params[:user_id]}).select('distinct on (user_track_categories.track_id) user_track_categories.*');
+    if params[:weather] != "undefined"
+      categories = Category.get_categories(params[:weather])
+      render json: UserTrackCategory.where({user_id: params[:user_id], category_id: categories}).select('distinct on (user_track_categories.track_id) user_track_categories.*').shuffle;
+    else
+      render json: UserTrackCategory.where({user_id: params[:user_id]}).select('distinct on (user_track_categories.track_id) user_track_categories.*');
+    end
   end
 
   def destroy
