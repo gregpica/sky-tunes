@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import createArtistList from '../util/createArtistList';
 import convert from '../util/convert';
 import storage from '../util/storage';
-import { USER, TRACK_PLAYER_PAGE } from '../constants';
+import { USER } from '../constants';
 
 class TrackPlayer extends React.Component {
   constructor(props){
