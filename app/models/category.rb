@@ -17,15 +17,17 @@ class Category < ApplicationRecord
   }
 
   def self.get_categories(weather)
-    Category.where(name: WEATHER_TO_CATEGORIES[weather]).ids
+    categories = Category.where(name: WEATHER_TO_CATEGORIES[weather]).ids
+    current_hour = Time.now.strftime("%H").to_i
+    if current_hour >= 5 && current_hour < 12
+      categories.concat(Category.where(name: "Morning").ids)
+    elsif current_hour >= 12 && current_hour < 17
+      categories.concat(Category.where(name: "Afternoon").ids)
+    elsif current_hour >= 17 && current_hour < 21
+      categories.concat(Category.where(name: "Evening").ids)
+    else
+      categories.concat(Category.where(name: "Night").ids)
+    end
   end
-end
 
-# "Sunny",
-# "Snow",
-# "Rain",
-# "Cloudy",
-# "Morning",
-# "Afternoon",
-# "Evening",
-# "Night"
+end
