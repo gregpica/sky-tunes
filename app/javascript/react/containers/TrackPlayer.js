@@ -42,7 +42,8 @@ class TrackPlayer extends React.Component {
 
   getUserTracksAndStartPlayback(deviceId) {
     const userId = storage.get(USER).id;
-    trackClient.get(userId, TRACK_PLAYER_PAGE)
+    const weather = convert.toUnderscore(this.state.currentWeather.icon)
+    trackClient.get(userId, weather)
       .then(response => response.json())
       .then(body => {
         const trackUris = body.user_track_categories.map(utc => `spotify:track:${utc.track.id}`);
@@ -58,12 +59,12 @@ class TrackPlayer extends React.Component {
         this.setState({
           currentWeather: body.currently
         })
+        this.setupPlayer();
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   componentDidMount() {
-    this.setupPlayer();
     this.getWeatherData();
   }
 

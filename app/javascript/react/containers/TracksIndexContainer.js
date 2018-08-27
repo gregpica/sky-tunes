@@ -5,7 +5,7 @@ import createArtistList from '../util/createArtistList';
 import trackClient from '../clients/track';
 import categoryClient from '../clients/category';
 import storage from '../util/storage';
-import { USER, CANCEL_EDIT_MESSAGE, DELETE_MESSAGE, NO_CATEGORY_MESSAGE, TRACK_INDEX_PAGE } from '../constants';
+import { USER, CANCEL_EDIT_MESSAGE, DELETE_MESSAGE, NO_CATEGORY_MESSAGE } from '../constants';
 
 class TracksIndexContainer extends React.Component {
   constructor(props){
@@ -33,7 +33,7 @@ class TracksIndexContainer extends React.Component {
 
   componentDidMount() {
     const userId = storage.get(USER).id;
-    trackClient.get(userId, TRACK_INDEX_PAGE)
+    trackClient.get(userId)
       .then(response => response.json())
       .then(body => {
         const tracks = body.user_track_categories.map(utc => utc.track);
