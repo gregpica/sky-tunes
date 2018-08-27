@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import createArtistList from '../util/createArtistList';
 import convert from '../util/convert';
 import storage from '../util/storage';
-import { USER } from '../constants';
+import { USER, TRACK_PLAYER_PAGE } from '../constants';
 
 class TrackPlayer extends React.Component {
   constructor(props){
@@ -42,7 +42,7 @@ class TrackPlayer extends React.Component {
 
   getUserTracksAndStartPlayback(deviceId) {
     const userId = storage.get(USER).id;
-    trackClient.get(userId)
+    trackClient.get(userId, TRACK_PLAYER_PAGE)
       .then(response => response.json())
       .then(body => {
         const trackUris = body.user_track_categories.map(utc => `spotify:track:${utc.track.id}`);

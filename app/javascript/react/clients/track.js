@@ -35,8 +35,8 @@ const editTrack = (userId, trackId, payload) => fetch(
   }
 );
 
-const get = userId => fetch(
-  `${USER_TRACK_CATEGORY_PATH}/${userId}/user_track_categories.json`,
+const get = (userId, page) => fetch(
+  `${USER_TRACK_CATEGORY_PATH}/${userId}/user_track_categories.json?page=${page}`,
   defaultOptions
 );
 

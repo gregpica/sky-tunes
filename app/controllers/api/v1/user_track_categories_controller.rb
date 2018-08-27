@@ -1,7 +1,11 @@
 class Api::V1::UserTrackCategoriesController < ApiController
 
   def index
-    render json: UserTrackCategory.where({user_id: params[:user_id]}).select('distinct on (user_track_categories.track_id) user_track_categories.*');
+    if params[:page] == "player"
+      render json: UserTrackCategory.where({user_id: params[:user_id]}).select('distinct on (user_track_categories.track_id) user_track_categories.*').shuffle;
+    elsif params[:page] == "index"
+      render json: UserTrackCategory.where({user_id: params[:user_id]}).select('distinct on (user_track_categories.track_id) user_track_categories.*');
+    end
   end
 
   def destroy
