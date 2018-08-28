@@ -2,7 +2,9 @@ class Api::V1::UserTrackCategoriesController < ApiController
 
   def index
     if params[:weather] != "undefined"
-      categories = Category.get_categories(params[:weather])
+      coordinates = Geocoder.search(request.remote_ip).first.data["loc"]
+      time_zone = Category.get_timezone(coordinates)
+      categories = Category.get_categories(params[:weather], time_zone)
       render json: UserTrackCategory.where({user_id: params[:user_id], category_id: categories}).select('distinct on (user_track_categories.track_id) user_track_categories.*').shuffle;
     else
       render json: UserTrackCategory.where({user_id: params[:user_id]}).select('distinct on (user_track_categories.track_id) user_track_categories.*');
