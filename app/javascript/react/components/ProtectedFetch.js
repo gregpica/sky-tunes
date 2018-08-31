@@ -26,4 +26,4 @@ export const createProtectedFetch = fetch => (path, args = null) => {
   }
 }
 
-export default createProtectedFetch(fetch)
+export default createProtectedFetch(Window.fetch)
