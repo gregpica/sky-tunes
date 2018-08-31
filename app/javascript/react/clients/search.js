@@ -1,10 +1,9 @@
-import getDefaultOptions from '../util/getDefaultOptions';
+import createProtectedFetch from '../components/ProtectedFetch';
 
 const SEARCH_PATH = 'https://api.spotify.com/v1/search';
 
-const get = query => fetch(
-  `${SEARCH_PATH}?q=${encodeURIComponent(query)}&type=track`,
-  getDefaultOptions()
+const get = query => createProtectedFetch(
+  `${SEARCH_PATH}?q=${encodeURIComponent(query)}&type=track`
 );
 
 export default {

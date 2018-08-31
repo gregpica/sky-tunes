@@ -1,10 +1,8 @@
-import getDefaultOptions from '../util/getDefaultOptions';
+import createProtectedFetch from '../components/ProtectedFetch';
 
 const ME_PATH = 'https://api.spotify.com/v1/me';
 
-const get = () => fetch(ME_PATH,
-  getDefaultOptions()
-);
+const get = () => createProtectedFetch(ME_PATH);
 
 export default {
   get: get

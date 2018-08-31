@@ -1,7 +1,7 @@
 import storage from './storage';
 import { JWT } from '../constants';
 
-export default () => {
+export default (key) => {
   const jwt = storage.get(JWT);
-  return (jwt && jwt.access_token) || "";
+  return (jwt && jwt[key]) || "";
 }

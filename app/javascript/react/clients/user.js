@@ -1,3 +1,5 @@
+import getTokenValue from '../util/getTokenValue';
+
 const USER_PATH = '/api/v1/user.json';
 
 const defaultOptions = {
@@ -11,9 +13,16 @@ const defaultOptions = {
 const post = code => fetch(USER_PATH, {
   ...defaultOptions,
   body: JSON.stringify({ code: code }),
-  method: 'POST',
+  method: 'POST'
+});
+
+const refresh = () => fetch(USER_PATH, {
+  ...defaultOptions,
+  body: JSON.stringify({ refresh_token: getTokenValue('refresh_token') }),
+  method: 'POST'
 });
 
 export default {
-  post: post
+  post: post,
+  refresh: refresh
 };
