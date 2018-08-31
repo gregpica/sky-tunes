@@ -5,7 +5,6 @@ import timeNowInSeconds from '../util/timeNowInSeconds';
 import userClient from '../clients/user';
 import meClient from '../clients/me';
 import { JWT, JWT_EXPIRATION_TIME_BUFFER } from '../constants';
-
 import Login from './Login'
 
 class Callback extends React.Component {

@@ -6,7 +6,7 @@ const PLAYER_PATH = 'https://api.spotify.com/v1/me/player/play';
 const put = (trackUris, deviceId) => createProtectedFetch(`${PLAYER_PATH}?device_id=${deviceId}`, {
   body: JSON.stringify({ uris: trackUris }),
   method: 'PUT'
-})
+});
 
 const playerReady = () => new Promise(resolve => {
   if (window.Spotify) {
