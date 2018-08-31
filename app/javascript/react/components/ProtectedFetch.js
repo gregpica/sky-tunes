@@ -4,6 +4,7 @@ import timeNowInSeconds from '../util/timeNowInSeconds';
 import getTokenValue from '../util/getTokenValue';
 import userClient from '../clients/user';
 import getDefaultTokenOptions from '../util/getDefaultTokenOptions';
+import fetch from "isomorphic-fetch"
 
 export const createProtectedFetch = fetch => (path, args = null) => {
   if (timeNowInSeconds() < getTokenValue('expiration_time')) {
@@ -26,4 +27,4 @@ export const createProtectedFetch = fetch => (path, args = null) => {
   }
 }
 
-export default createProtectedFetch(Window.fetch)
+export default createProtectedFetch(fetch)
