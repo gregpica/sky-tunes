@@ -7,24 +7,25 @@ class Api::V1::UserController < ApiController
       redirect_uri = ENV['REDIRECT_URI_DEVELOPMENT']
     end
 
-    body = {
-      grant_type: "authorization_code",
-      code: user_params[:code],
-      redirect_uri: redirect_uri,
-      client_id: ENV['CLIENT_ID'],
-      client_secret: ENV['CLIENT_SECRET']
-    }
+    if params[:code]
+      body = {
+        grant_type: "authorization_code",
+        code: params[:code],
+        redirect_uri: redirect_uri,
+        client_id: ENV['CLIENT_ID'],
+        client_secret: ENV['CLIENT_SECRET']
+      }
+    elsif params[:refresh_token]
+      body = {
+        grant_type: "refresh_token",
+        refresh_token: params[:refresh_token],
+        client_id: ENV['CLIENT_ID'],
+        client_secret: ENV['CLIENT_SECRET']
+      }
+    end
 
     auth_response = RestClient.post('https://accounts.spotify.com/api/token', body)
-    body = JSON.parse(auth_response.body)
-    render json: body
+    response_body = JSON.parse(auth_response.body)
+    render json: response_body
   end
-
-  def user_params
-    params
-      .permit(
-        :code
-      )
-  end
-
 end

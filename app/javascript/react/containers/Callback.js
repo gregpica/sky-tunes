@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import storage from '../util/storage';
+import timeNowInSeconds from '../util/timeNowInSeconds';
 import userClient from '../clients/user';
 import meClient from '../clients/me';
-import { JWT } from '../constants';
-
-
+import { JWT, JWT_EXPIRATION_TIME_BUFFER } from '../constants';
 import Login from './Login'
 
 class Callback extends React.Component {
@@ -22,7 +21,10 @@ class Callback extends React.Component {
     if(parsedQuerySearch.code) {
       userClient.post(parsedQuerySearch.code)
         .then(response => response.json())
-        .then(body => storage.set(JWT, body))
+        .then(body => {
+          body["expiration_time"] = timeNowInSeconds() + body["expires_in"] - JWT_EXPIRATION_TIME_BUFFER;
+          storage.set(JWT, body)
+        })
         .then(() => meClient.get())
         .then(response => response.json())
         .then(body => storage.set('user', body))
