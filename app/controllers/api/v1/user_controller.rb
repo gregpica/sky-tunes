@@ -26,6 +26,9 @@ class Api::V1::UserController < ApiController
 
     auth_response = RestClient.post('https://accounts.spotify.com/api/token', body)
     response_body = JSON.parse(auth_response.body)
+    if params[:refresh_token]
+      response_body["refresh_token"] = params[:refresh_token]
+    end 
     render json: response_body
   end
 end
