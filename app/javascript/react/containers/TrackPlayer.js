@@ -69,7 +69,9 @@ class TrackPlayer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.state.player.disconnect();
+    const { player } = this.state;
+    player.removeListener("player_state_changed")
+    player.disconnect();
   }
 
   render() {
