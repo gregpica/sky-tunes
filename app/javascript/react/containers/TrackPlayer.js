@@ -107,10 +107,8 @@ class TrackPlayer extends React.Component {
 
     return(
       <div className="text-center">
-        <br></br>
         {currentWeatherDiv}
         {this.state.isPlayerLoading ? <p> Loading... </p> : currentTrackDiv }
-        <br></br>
         <Link to="/tracks/new"><button className="add-new-track">Add New Tracks</button></Link>
       </div>
     )

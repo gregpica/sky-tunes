@@ -13,7 +13,7 @@ const CurrentWeather = props => {
         size={100}
         animate={true}
       />
-      <div className="columns small-4 small-centered">
+      <div className="columns small-6 medium-4 small-centered">
         <div className="row wrapper">
           <div className="columns small-6 small-left temp">
             {props.temperature}&deg;F
