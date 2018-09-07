@@ -27,7 +27,7 @@ const TrackIndexTile = props => {
     editDiv = <form className="edit-form" onSubmit={props.handleSubmit}>
       <i className="fas fa-times edit-x" onClick={props.cancelEdit}></i>
       <div className="row">
-        <div className="columns small-8 small-centered">
+        <div className="columns small-12 medium-8 small-centered">
            <div className="row">
              {checkBoxDiv}
            </div>
@@ -57,7 +57,7 @@ const TrackIndexTile = props => {
       })
 
     editDiv = <div className="row">
-      <div className="columns small-8 small-centered">
+      <div className="columns small-12 medium-8 small-centered">
          <div className="row">
            {checkBoxDiv}
          </div>
@@ -70,17 +70,19 @@ const TrackIndexTile = props => {
       <span className="small-12 columns wrapper">
         <img className="small-1 columns" src={props.albumCover} alt="album cover" />
         <span className="small-4 columns">{props.title}</span>
-        <span className="small-3 columns">{props.artists}</span>
-        <span className="small-2 columns">{props.album}</span>
-        <span className="small-1 columns">{props.duration}</span>
+        <span className="small-4 medium-3 columns">{props.artists}</span>
+        <span className="small-0 medium-2 columns hide-mobile">{props.album}</span>
+        <span className="small-0 medium-1 columns hide-mobile">{props.duration}</span>
         <i className={`${props.dropDownIcon} small-1 columns`} onClick={props.dropDownTrack}></i>
       </span>
       <div className={props.hidden}>
         <span className="small-12 columns wrapper">
           {editDiv}
-          <div className={`row text-center edit-delete-wrapper ${hideForEdit}`}>
-            <button className="small-2 columns edit-delete" onClick={props.handleEditClick}>Edit</button>
-            <button className="small-2 columns edit-delete" onClick={props.handleDelete}>Delete</button>
+          <div className={`small-8 medium-6 large-4 columns small-centered ${hideForEdit}`}>
+            <div className="row">
+              <button className="small-6 columns edit-delete" onClick={props.handleEditClick}>Edit</button>
+              <button className="small-6 columns edit-delete" onClick={props.handleDelete}>Delete</button>
+            </div>
           </div>
         </span>
       </div>
