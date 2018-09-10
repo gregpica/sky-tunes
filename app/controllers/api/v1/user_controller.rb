@@ -28,7 +28,7 @@ class Api::V1::UserController < ApiController
     response_body = JSON.parse(auth_response.body)
     if params[:refresh_token]
       response_body["refresh_token"] = params[:refresh_token]
-    end 
+    end
     render json: response_body
   end
 end

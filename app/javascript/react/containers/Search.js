@@ -50,7 +50,7 @@ class Search extends React.Component {
     });
 
    return (
-     <div className="small-6 small-centered columns">
+     <div className="small-10 medium-8 large-6 small-centered columns">
       <div className="row wrapper">
          <form>
           <div className="search-bar">

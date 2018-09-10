@@ -3,10 +3,31 @@
   margin-right: 1.5em;
 }
 
+@media only screen and (max-width: 40em) {
+  .index-tile .hide-mobile {
+    display: none;
+  }
+  .index-tile span span {
+    font-size: 12px;
+  }
+  .index-labels {
+    display: none;
+  }
+  .edit-delete {
+    font-size: 10px;
+    width: 4em;
+    padding: 1em;
+  }
+  .index-tile .wrapper span{
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+}
+
 .index-tile .wrapper {
   background: rgba(0, 0, 0, 0.15);
   box-shadow: 1px 2px 3px rgba(72, 72, 72, 0.15);
-  margin-bottom: .75em;
+  margin-top: .75em;
   padding-left: 0em;
   color: #171717;
 
@@ -33,34 +54,21 @@
 }
 
 .index-labels {
-  margin: 1% 2%;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+}
+
+.index-labels .wrapper {
+  padding-left: 0em;
   color: #c2c3c5;
   letter-spacing: 1px;
+  margin-top: .75em;
 }
 
-.index-labels .title {
-  display: inline-block;
-}
-
-.index-labels .title:first-child{
-  margin-left: 4%;
-  padding-left: 22px;
-  width: 35%;
-}
-
-.index-labels .title:nth-child(2){
-  padding-left: 2px;
-  width:24%;
-}
-
-.index-labels .title:nth-child(3){
-  padding-left: 12px;
-  width:13%;
-}
-
-.index-labels .title:last-child{
-  width: 144px;
-  text-align: center;
+.index-labels .wrapper .img-spot {
+  width: 4em;
+  height: auto;
+  padding-left: 0em;
 }
 
 .hidden {
@@ -69,18 +77,13 @@
 
 .edit-delete {
   margin-top: 1em;
-  width: 20%;
+  width: 5em;
   background-color: #333333;
   opacity: .8;
 }
 
 .edit-delete:hover {
   background-color: #49adc1;
-}
-
-.edit-delete-wrapper {
-  padding-right: 20em;
-  padding-left: 20em;
 }
 
 .edit-form {
@@ -90,4 +93,8 @@
 .edit-x {
   padding-left: 2em;
   font-size: 22px;
+}
+
+.yo {
+  padding-left: 2%;
 }

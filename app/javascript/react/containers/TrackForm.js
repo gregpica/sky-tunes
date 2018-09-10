@@ -48,7 +48,7 @@ class TrackForm extends React.Component {
          </p>
        </div>
        <div className="row">
-       <div className="columns small-8 small-centered">
+       <div className="columns small-12 medium-8 small-centered">
         <div className="row">
           {categoryCheckBoxes}
         </div>

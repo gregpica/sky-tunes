@@ -39,6 +39,7 @@
 }
 
 .add-new-track {
+  margin-top: 1.6em;
   opacity: .8;
   background-color: #333333;
 }
@@ -49,6 +50,7 @@
 
 .sky-con {
   opacity: .7;
+  margin-top: 1.5em;
 }
 
 .temp {
