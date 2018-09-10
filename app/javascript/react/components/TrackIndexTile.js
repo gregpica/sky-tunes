@@ -11,7 +11,7 @@ const TrackIndexTile = props => {
     const checkBoxDiv = props.allCategories.map(category => {
         return (
           <div key={category.id} className="columns small-3">
-            <label className="container">
+            <label className="container edit-checkbox">
               {category.name}
               <input
                 type="checkbox"
@@ -43,7 +43,7 @@ const TrackIndexTile = props => {
     const checkBoxDiv = props.allCategories.map(category => {
         return (
           <div key={category.id} className="columns small-3">
-            <label className="container">
+            <label className="container edit-checkbox">
               {category.name}
               <input
                 type="checkbox"

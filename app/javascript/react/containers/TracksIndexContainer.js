@@ -210,10 +210,14 @@ class TracksIndexContainer extends React.Component {
           </div>
         </div>
         <div className="index-labels">
-          <span className="title">TITLE</span>
-          <span className="title">ARTIST</span>
-          <span className="title">ALBUM</span>
-          <span className="title"><i className="far fa-clock"></i></span>
+          <span className="small-12 columns wrapper">
+            <span className="small-1 columns img-spot"><br></br></span>
+            <span className="small-4 columns">TITLE</span>
+            <span className="small-4 medium-3 columns">ARTIST</span>
+            <span className="small-0 medium-2 columns">ALBUM</span>
+            <span className="small-0 medium-1 columns clock-spot"><i className="far fa-clock"></i></span>
+            <span className="small-1 columns"><br></br></span>
+          </span>
         </div>
         {this.getTrackIndexTiles()}
       </div>
