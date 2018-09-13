@@ -15,6 +15,8 @@ Ruby Gems: geocoder, timezone
 
 Author: Greg Pica
 
+Sceencast Demo (of slightly older version): https://vimeo.com/289767468
+
 Screenshots:
 ![Alt text](./app/assets/images/playerpage_screenshot.jpg?raw=true)
 ![Alt text](./app/assets/images/index_screenshot.jpg?raw=true)
