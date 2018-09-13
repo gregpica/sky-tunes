@@ -73,3 +73,8 @@
   border-bottom: 2px solid #f8ffd8;
   margin-bottom: 2%;
 }
+
+.no-tracks {
+  padding: 3em 0em;
+  font-weight: 500;
+}

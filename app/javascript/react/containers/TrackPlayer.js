@@ -17,7 +17,8 @@ class TrackPlayer extends React.Component {
       isPlayerLoading: false,
       playerState: null,
       player: null,
-      currentWeather: null
+      currentWeather: null,
+      noTracksInCategoryMessage: ""
     };
     this.setupPlayer = this.setupPlayer.bind(this);
     this.getUserTracksAndStartPlayback = this.getUserTracksAndStartPlayback.bind(this);
@@ -46,8 +47,12 @@ class TrackPlayer extends React.Component {
     trackClient.get(userId, weather)
       .then(response => response.json())
       .then(body => {
-        const trackUris = body.user_track_categories.map(utc => `spotify:track:${utc.track.id}`);
-        return playerClient.put(trackUris, deviceId);
+        if(body.no_tracks) {
+          this.setState({noTracksInCategoryMessage: body.no_tracks})
+        } else {
+          const trackUris = body.user_track_categories.map(utc => `spotify:track:${utc.track.id}`);
+          return playerClient.put(trackUris, deviceId);
+        }
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -92,6 +97,10 @@ class TrackPlayer extends React.Component {
         onNextClick={() => player.nextTrack()}
         playToggleClass={playToggleClass}
       />
+    } else if (this.state.noTracksInCategoryMessage) {
+      currentTrackDiv = <div className="no-tracks small-8 small-centered columns">
+        {this.state.noTracksInCategoryMessage}
+      </div>
     }
 
     let currentWeatherDiv;
