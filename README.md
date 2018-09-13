@@ -8,7 +8,8 @@
 Like many music lovers, I often find myself listening to certain types of music based off my current mood. A significant influencer in my mood is the climatic conditions around me. This association inspired me to develop my web application, SkyTunes, which dynamically generates curated music playlists based off the time of day and weather of a user's current geolocation.
 
 Visit the site at: https://sky-tunes-player.herokuapp.com
-  NOTE: See a list of Spotify Web Playback SDK's (and thus SkyTune's) supported browsers - https://developer.spotify.com/documentation/web-playback-sdk/#supported-browsers
+
+NOTE: See a list of Spotify Web Playback SDK's (and thus SkyTune's) supported browsers - https://developer.spotify.com/documentation/web-playback-sdk/#supported-browsers
 
 Developed using React.js, Ruby on Rails, and PostgreSQL, with custom, responsive design (HTML, CSS, Foundation)
 
